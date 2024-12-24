@@ -1,0 +1,234 @@
+.MainBody {
+    width: 100%;
+    height: 100px;
+    background: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 7px;
+    position: sticky;
+    top: 0px;
+    z-index: 99999;
+}
+
+.HeaderWrapper {
+    width: 90%;
+    height: 100%;
+    /* background: yellow; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+
+}
+
+.MobileToggle {
+    display: none;
+}
+
+.NavsContainer {
+   display: flex;
+   width: 40%;
+   /* background: red; */
+   gap: 20px;
+   align-items: center; 
+
+   & nav {  
+    width: 70%;
+
+    & ul {
+        display: flex;
+        justify-content: space-around;
+        /* background: red; */
+        position: relative;
+
+
+        & li {
+            list-style-type: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 400;
+            color: rgb(39, 35, 48);
+            transition: all 350ms ease-in;
+            transform: scale(1);
+            padding: 10px;
+            border-radius: 3px;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        & li:hover {
+            transform: scale(1.07);
+            background: rgba(231, 230, 230, 0.366);
+        }
+    }
+   }
+
+   & .Search {
+        display: flex;
+        font-size: 20px;
+        align-items: center;
+        cursor: pointer;
+        transition: all 350ms ease-in;
+        transform: scale(1);
+        padding: 10px;
+        /* background: #000; */
+   }
+
+  & .Search:hover {
+    transform: scale(1.07);
+    background: rgba(231, 230, 230, 0.366);
+}
+}
+
+.DropList {
+    position: absolute;
+    background: white;
+    left: 0px;
+    top: 100%;
+    width: 70%;
+    height: 40vh;
+    transition: all 350ms ease-in-out;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+    /* animation: backInDown; */
+    /* animation-duration: 0.5s; don't forget to set a duration! */
+}
+
+.SearchInput {
+    width: 100%;
+    height: 40px;
+    outline: none;
+    border: 1px solid gray;
+    padding-left: 10px;
+    border-radius: 3px;
+}
+
+.SodLogo {
+    width: 20%;
+    /* background: red; */
+
+    & img {
+        width: 40%;
+        /* height: 50%; */
+        object-fit: cover;
+    }
+}
+
+.cartContainer {
+    width: 30%;
+    /* background: yellow; */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 40px;
+}
+
+
+.AmountContainer {
+    display: flex;
+    font-size: 20px;
+    font-weight: 700;
+    align-items:center;
+    gap: 10px;
+}
+
+.Naira, .dollar {
+    display: flex;
+    align-items: center;
+}
+
+.CartBag {
+    font-size: 20px;
+    position: relative;
+    cursor: pointer;
+    transform: scale(1);
+    transition: all 350ms ease-in-out;
+}
+
+.CartBag:hover {
+    transform: scale(1.05);
+}
+
+.CartBagNum {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: red;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    border-radius: 50%;
+    bottom: 60%;
+    left: 65%;
+}
+
+.UserIcon {
+    cursor: pointer;
+    font-size: 20px;
+    transform: scale(1);
+    transition: all 350ms ease-in-out;
+}
+
+.UserIcon:hover {
+    transform: scale(1.05);
+}
+
+
+/* End of Media Query Styling For Desktop Device */
+
+/* Media Query Styling for Small Desktop  */
+
+@media only screen and (max-width: 1200px) {}
+
+/* End of Media Query Styling for Tablet Device */
+
+
+/* Media Query Styling for Big Tablet Device */
+
+@media only screen and (max-width: 900px) {
+    .MobileToggle {
+        display: flex;
+    }
+
+    nav {
+        display: none;
+        
+    }
+
+    .NavsContainer {
+        background: green;
+    }
+
+    .Search {
+        display: none;
+    }
+
+    .SodLogo{
+        background: red;
+    }
+
+    .cartContainer {
+        width: 30%;
+        background: #000;
+    }
+}
+
+/* End of Media Query Styling for Tablet Device */
+/* Media Query Styling for Tablet Device */
+
+@media only screen and (max-width: 760px) {}
+
+/* End of Media Query Styling for Tablet Device */
+
+/* Media Query Styling for Mobile Device */
+
+@media only screen and (max-width: 480px) {}
+
+@media only screen and (max-width: 379px) {}
+
+
+
+
