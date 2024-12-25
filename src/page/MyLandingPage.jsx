@@ -2,12 +2,22 @@ import React from 'react'
 import "./pagesCss/LandingPage.css"
 import ProductCard from '../components/ProductCard'
 import { MdKeyboardArrowRight } from "react-icons/md";
+import hero_section_image from '../assets/hero_section_image.avif'
 
 const MyLandingPage = () => {
   return (
     <>
       <main className='landing_page_body'>
-        <section className='hero_section_body'></section>
+        <section className='hero_section_body'>
+          <div className='hero_section_left_container'>
+            <h1>Discover. Shop. Delight.</h1>
+            <h3>Explore exclusive collections curated just for you. From everyday essentials to premium indulgences, find what you love all in one place.</h3>
+            <button>Shop now</button>
+          </div>
+          <div className='hero_section_right_container'>
+            <img src={hero_section_image} alt=''/>
+          </div>
+        </section>
         <section className='landing_page_latest_collection_body'>
           <div className='landing_page_latest_collection_top_container'>
             <h3>LATEST COLLECTION</h3>
