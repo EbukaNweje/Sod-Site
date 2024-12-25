@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import "./Header.css"
+import "./componentCss/Header.css"
 import TopHeader from './TopHeader'
 import { IoSearch,IoMenu } from "react-icons/io5";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
@@ -9,6 +9,7 @@ import { FaDollarSign } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import 'animate.css';
 import SodLogo from "../assets/sodlogo.png"
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const [drop, setDrop] = useState(false)
@@ -56,7 +57,21 @@ const Header = () => {
                     <li>New Arrivals</li>
                     <li>Collections</li>
                     
-                    { drop ? <div className='DropList' onMouseLeave={ShowDrop} >m</div> : null}
+                    { drop ? 
+                        <div className='DropList' onMouseLeave={ShowDrop} >
+                            <Link className='dropList_link'>Clothing</Link>
+                            <Link className='dropList_link'>Denim</Link>
+                            <Link className='dropList_link'>Shirts</Link>
+                            <Link className='dropList_link'>Caps</Link>
+                            <Link className='dropList_link'>Pants</Link>
+                            <Link className='dropList_link'>Hoodies</Link>
+                            <Link className='dropList_link'>Slides</Link>
+                            <Link className='dropList_link'>Men</Link>
+                            <Link className='dropList_link'>Women</Link>
+                        </div> 
+                        : 
+                        null
+                    }
                  </ul>
                 </nav> : null
                }
