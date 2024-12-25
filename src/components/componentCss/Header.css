@@ -1,25 +1,22 @@
 .MainBody {
     width: 100%;
-    height: 100px;
     background: white;
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 7px;
     position: sticky;
     top: 0px;
     z-index: 99999;
 }
 
 .HeaderWrapper {
-    width: 90%;
-    height: 100%;
+    width: 100%;
     /* background: yellow; */
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
-
+    padding: 20px 40px;
+    border-bottom: 1px solid rgba(240, 240, 240, 0.487);
 }
 
 .MobileToggle {
@@ -87,12 +84,29 @@
     left: 0px;
     top: 100%;
     width: 70%;
-    height: 40vh;
+    padding: 16px;
     transition: all 350ms ease-in-out;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
     /* animation: backInDown; */
     /* animation-duration: 0.5s; don't forget to set a duration! */
+}
+
+.dropList_link{
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    font-family: "Lato", sans-serif;
+    font-weight: 500;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.dropList_link:hover{
+    background-color: rgba(244, 244, 244, 0.8);
 }
 
 .SearchInput {
@@ -117,7 +131,7 @@
 
 .cartContainer {
     width: 30%;
-    /* background: yellow; */
+    /* background: blue; */
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -189,7 +203,7 @@
 /* Media Query Styling for Big Tablet Device */
 
 @media only screen and (max-width: 900px) {
-    .MobileToggle {
+    /* .MobileToggle {
         display: flex;
     }
 
@@ -213,7 +227,7 @@
     .cartContainer {
         width: 30%;
         background: #000;
-    }
+    } */
 }
 
 /* End of Media Query Styling for Tablet Device */
@@ -225,7 +239,52 @@
 
 /* Media Query Styling for Mobile Device */
 
-@media only screen and (max-width: 480px) {}
+@media only screen and (max-width: 480px) {
+    .HeaderWrapper {
+        /* background: yellow; */
+        padding: 10px 16px;
+    }
+
+    .MobileToggle {
+        font-size: 22px;
+        display: flex;
+    }
+
+    .NavsContainer{
+        /* background-color: blue; */
+        width: max-content;
+    }
+
+    nav {
+        display: none;
+        
+    }
+
+    .Search {
+        font-size: 22px;
+   }
+
+    .SodLogo {
+        width: 20%;
+        height: 40px;
+        /* background: red; */
+    
+        & img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    .cartContainer {
+        width: 30%;
+        /* background: #000; */
+    }
+
+    .AmountContainer{
+        display: none;
+    }
+}
 
 @media only screen and (max-width: 379px) {}
 

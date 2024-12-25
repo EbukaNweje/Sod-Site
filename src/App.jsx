@@ -1,15 +1,19 @@
 import React from 'react'
-import Header from './components/Header'
-import LandingPage from "./page/MyLandingPage"
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import MainLanding from './page/MainLanding'
+import MyLandingPage from './page/MyLandingPage'
 
 
 
 const App = () => {
   return (
-    <div>
-      <Header/>
-      <LandingPage/>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<MainLanding/>}>
+          <Route path='/' element={<MyLandingPage/>}/>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
