@@ -66,14 +66,14 @@ const Footer = () => {
             </div>
             <div className='footer_links_container'>
               <h2>Locate Us</h2>
-              <a href=''>ISB Originals Store B11, Capital Mall,</a>
+              <a href=''>Sod Orginals Store B11, Capital Mall,</a>
               <a href=''>Orchid Road Lekki Lagos, Nigeria.</a>
               <a href=''>+2348123947939</a>
               <a href=''>12@isb.ng</a>
             </div>
           </div>
           <div className='footer_bottom_end'>
-            <p>© 2024 ISB Originals. Powered by ISB Originals</p>
+            <p>© 2024 Sod Orginal. Powered by Sod Orginal</p>
             <span>
               <LiaCcVisa/>
               <LiaCcMastercard/>

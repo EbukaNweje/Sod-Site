@@ -1,0 +1,64 @@
+.new_arrivals_body{
+    width: 100%;
+}
+
+.new_arrivals_hero_section{
+    width: 100%;
+    background: linear-gradient(to right, #000000dd, #000000cd), url('../../assets/new_arrival_hero_image.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 150px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.new_arrivals_hero_section h1{
+    width: max-content;
+    color: #fff;
+    font-size: 50px;
+    font-family: "Lato", sans-serif;
+    font-weight: 500;
+    letter-spacing: 6px;
+    word-spacing: 4px;
+    position: relative;
+    /* background-color: red; */
+}
+
+.new_arrivals_hero_section h1:before{
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    right: -60px;
+    width: 80px;
+    height: 1px;
+    background-color: #fff;
+}
+
+.new_arrivals_hero_section h1:after{
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: -70px;
+    width: 80px;
+    height: 1px;
+    background-color: #fff;
+}
+
+.new_arrivals_hero_section p{
+    color: #fff;
+    font-size: 18px;
+    font-family: "Lato", sans-serif;
+    font-weight: 500;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+}
+
+.new_arrivals_items_container{
+    width: 100%;
+    padding: 0px 80px;
+    margin-top: 50px;
+}

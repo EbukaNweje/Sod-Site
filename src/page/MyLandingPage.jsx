@@ -3,8 +3,12 @@ import "./pagesCss/LandingPage.css"
 import ProductCard from '../components/ProductCard'
 import { MdKeyboardArrowRight } from "react-icons/md";
 import hero_section_image from '../assets/hero_section_image.avif'
+import { useNavigate } from 'react-router-dom';
 
 const MyLandingPage = () => {
+
+  const navigate = useNavigate()
+
   return (
     <>
       <main className='landing_page_body'>
@@ -30,7 +34,7 @@ const MyLandingPage = () => {
         <section className='landing_page_new_arrivals_body'>
           <div className='landing_page_new_arrivals_top_container'>
             <h3>New Arrivals</h3>
-            <button>View All <MdKeyboardArrowRight size={20}/></button>
+            <button onClick={()=> navigate("/new-arrivals")}>View All <MdKeyboardArrowRight size={20}/></button>
           </div>
           <div className='landing_page_new_arrivals_bottom_container'>
             <ProductCard limit={4}/>
