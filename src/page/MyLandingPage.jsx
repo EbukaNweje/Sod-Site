@@ -16,7 +16,7 @@ const MyLandingPage = () => {
           <div className='hero_section_left_container'>
             <h1>Discover. Shop. Delight.</h1>
             <h3>Explore exclusive collections curated just for you. From everyday essentials to premium indulgences, find what you love all in one place.</h3>
-            <button>Shop now</button>
+            <button onClick={()=> navigate(`/product-category/Shop`)}>Shop now</button>
           </div>
           <div className='hero_section_right_container'>
             <img src={hero_section_image} alt=''/>
@@ -43,7 +43,7 @@ const MyLandingPage = () => {
         <section className='landing_page_special_offer_body'>
           <p>SPECIAL OFFER</p>
           <h2>Up to 30% OFF</h2>
-          <button>SHOP NOW</button>
+          <button onClick={()=> navigate(`/product-category/Shop`)}>SHOP NOW</button>
         </section>
       </main>
     </>
