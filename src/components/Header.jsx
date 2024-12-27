@@ -62,15 +62,15 @@ const Header = () => {
                     
                     { drop ? 
                         <div className='DropList' onMouseLeave={ShowDrop} >
-                            <Link className='dropList_link'>Clothing</Link>
-                            <Link className='dropList_link'>Denim</Link>
-                            <Link className='dropList_link'>Shirts</Link>
-                            <Link className='dropList_link'>Caps</Link>
-                            <Link className='dropList_link'>Pants</Link>
-                            <Link className='dropList_link'>Hoodies</Link>
-                            <Link className='dropList_link'>Slides</Link>
-                            <Link className='dropList_link'>Men</Link>
-                            <Link className='dropList_link'>Women</Link>
+                            <Link to = {`/product-category/Clothing`} className='dropList_link'>Clothing</Link>
+                            <Link to = {`/product-category/Denim`} className='dropList_link'>Denim</Link>
+                            <Link to = {`/product-category/Shirts`} className='dropList_link'>Shirts</Link>
+                            <Link to = {`/product-category/Caps`} className='dropList_link'>Caps</Link>
+                            <Link to = {`/product-category/Pants`} className='dropList_link'>Pants</Link>
+                            <Link to = {`/product-category/Hoodies`} className='dropList_link'>Hoodies</Link>
+                            <Link to = {`/product-category/Slides`} className='dropList_link'>Slides</Link>
+                            <Link to = {`/product-category/Men`} className='dropList_link'>Men</Link>
+                            <Link to = {`/product-category/Women`} className='dropList_link'>Women</Link>
                         </div> 
                         : 
                         null

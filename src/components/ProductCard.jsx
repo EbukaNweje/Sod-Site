@@ -4,7 +4,7 @@ import singlet_black from '../assets/singlet_black.png'
 import { IoCart } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 
-const ProductCard = ({limit}) => {
+const ProductCard = ({limit, categoryCard}) => {
 
     const navigate = useNavigate()
 
@@ -126,7 +126,7 @@ const ProductCard = ({limit}) => {
         <div className='product_card_body'>
             {
                 productsToDisplay.map((e)=>(
-                    <div onClick={()=> navigate(`/product/${e.id}`)} key={e.id} className='product_card'>
+                    <div onClick={()=> navigate(`/product/${e.id}`)} key={e.id} className={`product_card ${categoryCard}`}>
                         <div className='product_card_cart_btn'>
                             <IoCart/>
                         </div>
