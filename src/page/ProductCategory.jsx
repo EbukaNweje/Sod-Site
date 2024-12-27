@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
 import './pagesCss/productCategory.css'
+import ProductCard from '../components/ProductCard'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const ProductCategory = () => {
+
+    const navigate = useNavigate()
+    const {category} = useParams()
 
     const [categories, SetCategories] = useState([
         {
@@ -90,7 +95,7 @@ const ProductCategory = () => {
                     <h2>Categories</h2>
                     {
                         categories.map((item)=>(
-                            <div className='aside_category_link'>
+                            <div className='aside_category_link' onClick={()=> navigate(`/product-category/${item.category}`)}>
                                 <p>{item.category}</p>
                                 <p>({item.no})</p>
                             </div>
@@ -100,7 +105,13 @@ const ProductCategory = () => {
             </aside>
             <article className='product_category_article'>
                 <section className='category_article_hero_section'>
-
+                    <h1>{category}</h1>
+                </section>
+                <section className='category_article_text_section'>
+                    <p>Discover the latest trends and timeless pieces for every season.</p>
+                </section>
+                <section className='category_article_product_container'>
+                    <ProductCard categoryCard="categoryCard"/>
                 </section>
             </article>
         </main>

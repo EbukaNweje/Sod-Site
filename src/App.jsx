@@ -18,7 +18,7 @@ const App = () => {
           <Route path='/' element={<MyLandingPage/>}/>
           <Route path='/new-arrivals' element={<NewArrivals/>}/>
           <Route path='/product/:id' element={<Product/>}/>
-          <Route path='/product-category' element={<ProductCategory/>}/>
+          <Route path='/product-category/:category' element={<ProductCategory/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
