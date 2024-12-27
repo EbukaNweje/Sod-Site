@@ -9,9 +9,12 @@ import { FaDollarSign } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import 'animate.css';
 import SodLogo from "../assets/sodlogo.png"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
+
+    const navigate = useNavigate()
+
     const [drop, setDrop] = useState(false)
     const [search, setSearch] = useState(false)
     const [changeScale, setChangeScale] = useState(false)
@@ -54,7 +57,7 @@ const Header = () => {
                 <nav>
                     <ul>
                     <li onMouseEnter={ShowDrop}>Shop By Category {drop ? <IoMdArrowDropdown/> : <IoMdArrowDropup/>} </li>
-                    <li>New Arrivals</li>
+                    <li onClick={()=> navigate("/new-arrivals")}>New Arrivals</li>
                     <li>Collections</li>
                     
                     { drop ? 
@@ -83,7 +86,7 @@ const Header = () => {
             <div className='SodLogo' style={{
                 transform: changeScale ? "scale(1)" : "scale(1.2)",
                 transition: 'transform 0.2s ease-in-out'
-            }}>
+            }} onClick={()=> navigate("/")}>
                 <img src={SodLogo} alt="Sod Orginal" />
             </div>
             <div className='cartContainer'>

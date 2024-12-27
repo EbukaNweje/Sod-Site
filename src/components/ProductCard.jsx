@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import './componentCss/productCard.css'
 import singlet_black from '../assets/singlet_black.png'
 import { IoCart } from "react-icons/io5";
+import { useNavigate } from 'react-router-dom';
 
 const ProductCard = ({limit}) => {
+
+    const navigate = useNavigate()
 
     const [products, setProducts] = useState([
         {
@@ -43,73 +46,73 @@ const ProductCard = ({limit}) => {
             amount : "129,000.00₦ VAT"
         },
         {
-            id : 6,
+            id : 7,
             image : singlet_black,
             desc : "ISBx Center Logo Tank Top / Black",
             amount : "129,000.00₦ VAT"
         },
         {
-            id : 6,
+            id : 8,
             image : singlet_black,
             desc : "ISBx Center Logo Tank Top / Black",
             amount : "129,000.00₦ VAT"
         },
         {
-            id : 6,
+            id : 9,
             image : singlet_black,
             desc : "ISBx Center Logo Tank Top / Black",
             amount : "129,000.00₦ VAT"
         },
         {
-            id : 6,
+            id : 10,
             image : singlet_black,
             desc : "ISBx Center Logo Tank Top / Black",
             amount : "129,000.00₦ VAT"
         },
         {
-            id : 6,
+            id : 11,
             image : singlet_black,
             desc : "ISBx Center Logo Tank Top / Black",
             amount : "129,000.00₦ VAT"
         },
         {
-            id : 6,
+            id : 12,
             image : singlet_black,
             desc : "ISBx Center Logo Tank Top / Black",
             amount : "129,000.00₦ VAT"
         },
         {
-            id : 6,
+            id : 13,
             image : singlet_black,
             desc : "ISBx Center Logo Tank Top / Black",
             amount : "129,000.00₦ VAT"
         },
         {
-            id : 6,
+            id : 14,
             image : singlet_black,
             desc : "ISBx Center Logo Tank Top / Black",
             amount : "129,000.00₦ VAT"
         },
         {
-            id : 6,
+            id : 15,
             image : singlet_black,
             desc : "ISBx Center Logo Tank Top / Black",
             amount : "129,000.00₦ VAT"
         },
         {
-            id : 6,
+            id : 16,
             image : singlet_black,
             desc : "ISBx Center Logo Tank Top / Black",
             amount : "129,000.00₦ VAT"
         },
         {
-            id : 6,
+            id : 17,
             image : singlet_black,
             desc : "ISBx Center Logo Tank Top / Black",
             amount : "129,000.00₦ VAT"
         },
         {
-            id : 6,
+            id : 18,
             image : singlet_black,
             desc : "ISBx Center Logo Tank Top / Black",
             amount : "129,000.00₦ VAT"
@@ -123,7 +126,7 @@ const ProductCard = ({limit}) => {
         <div className='product_card_body'>
             {
                 productsToDisplay.map((e)=>(
-                    <div key={e.id} className='product_card'>
+                    <div onClick={()=> navigate(`/product/${e.id}`)} key={e.id} className='product_card'>
                         <div className='product_card_cart_btn'>
                             <IoCart/>
                         </div>

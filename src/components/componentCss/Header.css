@@ -15,7 +15,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 40px;
+    padding: 22px 40px;
     border-bottom: 1px solid rgba(240, 240, 240, 0.487);
 }
 
@@ -24,34 +24,36 @@
 }
 
 .NavsContainer {
+    width: max-content;
    display: flex;
-   width: 40%;
-   /* background: red; */
+   /* background: blue; */
    gap: 20px;
    align-items: center; 
 
    & nav {  
-    width: 70%;
+    width: max-content;
 
     & ul {
         display: flex;
         justify-content: space-around;
         /* background: red; */
         position: relative;
+        gap: 20px;
 
 
         & li {
             list-style-type: none;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: 400;
+            font-size: 15px;
+            font-weight: 500;
             color: rgb(39, 35, 48);
+            font-family: "Poppins", sans-serif;
             transition: all 350ms ease-in;
             transform: scale(1);
             padding: 10px;
             border-radius: 3px;
             display: flex;
-            align-items: flex-end;
+            align-items: center;
         }
 
         & li:hover {
@@ -119,13 +121,15 @@
 }
 
 .SodLogo {
-    width: 20%;
+    width: 100px;
+    height: 60px;
     /* background: red; */
+    cursor: pointer;
 
     & img {
-        width: 40%;
-        /* height: 50%; */
-        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 }
 
