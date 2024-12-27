@@ -59,10 +59,10 @@ const Footer = () => {
             </div>
             <div className='footer_links_container'>
               <h2>Discover</h2>
-              <a href=''>Shirts</a>
-              <a href=''>Hoodies</a>
-              <a href=''>Caps</a>
-              <a href=''>Slides</a>
+              <a href = {`/product-category/Clothing`}>Clothing</a>
+              <a href = {`/product-category/Shirts`}>Shirts</a>
+              <a href = {`/product-category/Hoodies`}>Hoodies</a>
+              <a href = {`/product-category/Caps`}>Caps</a>
             </div>
             <div className='footer_links_container'>
               <h2>Locate Us</h2>
