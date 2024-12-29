@@ -6,7 +6,8 @@ import NewArrivals from './page/NewArrivals'
 import ScrollToTop from './ScrollToTop'
 import Product from './page/Product'
 import ProductCategory from './page/ProductCategory'
-
+import Login from './onBoarding/Login'
+import Register from './onBoarding/Register'
 
 
 const App = () => {
@@ -14,6 +15,8 @@ const App = () => {
     <BrowserRouter>
       <ScrollToTop/>
       <Routes>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/register' element={<Register/>}/>
         <Route element={<MainLanding/>}>
           <Route path='/' element={<MyLandingPage/>}/>
           <Route path='/new-arrivals' element={<NewArrivals/>}/>
