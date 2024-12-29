@@ -123,3 +123,40 @@
     background-color: #000;
     color: #fff;
 }
+
+
+
+@media screen and (max-width: 768px){
+    .product_details_body{
+        padding: 50px 16px;
+    }
+
+    .product_details_container{
+        padding: 20px 16px;
+        flex-direction: column;
+    }
+
+    .product_details_image_container{
+        width: 100%;
+        height: 200px;
+    }
+
+    .product_details_image_container img{
+        object-fit: contain;
+    }
+
+    .product_details_information_container{
+        width: 100%;
+        height: max-content;
+        margin-top: 10px;
+    }
+
+    .product_details_information_container h1{
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .product_details_information_container h3{
+        font-size: 18px;
+    }
+}
