@@ -7,11 +7,11 @@ const NewArrivals = () => {
     <>
         <main className='new_arrivals_body'>
             <section className='new_arrivals_hero_section'>
-                <h1>New Arrivals</h1>
-                <p>Discover the New Arrivals  Sod orginals at Sod orginals</p>
+              <h1>New Arrivals</h1>
+              <p>Discover the New Arrivals  Sod orginals at Sod orginals</p>
             </section>
             <section className='new_arrivals_items_container'>
-                <ProductCard/>
+              <ProductCard/>
             </section>
         </main>
     </>
