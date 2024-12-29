@@ -186,3 +186,11 @@
     cursor: pointer;
     font-weight: 600;
 }
+
+
+
+@media screen and (max-width: 768px){
+    .onboarding_item_container{
+        width: 90%;
+    }
+}
