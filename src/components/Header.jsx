@@ -10,6 +10,8 @@ import { FaUser } from "react-icons/fa";
 import 'animate.css';
 import SodLogo from "../assets/sodlogo.png"
 import { Link, useNavigate } from 'react-router-dom';
+import { FaRegUser } from "react-icons/fa6";
+import { BsShopWindow } from "react-icons/bs";
 
 const Header = () => {
 
@@ -18,6 +20,7 @@ const Header = () => {
     const [drop, setDrop] = useState(false)
     const [search, setSearch] = useState(false)
     const [changeScale, setChangeScale] = useState(false)
+    const [showAccountListing, setShowAccountListing] = useState(false)
 
     const ShowDrop = () => {
         setDrop(!drop)
@@ -101,7 +104,23 @@ const Header = () => {
                 </div>
 
                 <div className='UserIcon'>
-                        <FaUser/>
+                    <FaUser style={{cursor: "pointer"}} onClick={()=>setShowAccountListing(!showAccountListing)}/>
+                    {
+                        showAccountListing == true ?
+
+                            <div className='account_listing_container'>
+                                <div className='header_signin_btn'><button onClick={()=>navigate("/login")}>Sign In</button></div>
+                                <div className='account_listing_link'>
+                                    <FaRegUser size={16}/>
+                                    <p>My Account</p>
+                                </div>
+                                <div className='account_listing_link'>
+                                    <BsShopWindow size={16}/>
+                                    <p>Orders</p>
+                                </div>
+                            </div>
+                        : null
+                    }
                 </div>
             </div>
         </article>
