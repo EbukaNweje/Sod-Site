@@ -162,6 +162,10 @@
     cursor: pointer;
     transform: scale(1);
     transition: all 350ms ease-in-out;
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    height: max-content;
 }
 
 .CartBag:hover {
@@ -246,6 +250,44 @@
     background-color: lightgrey;
 }
 
+.mobile_search_body{
+    width: 100%;
+    height: 56px;
+    /* background-color: blue; */
+    display: none;
+    padding: 10px 16px;
+}
+
+.mobile_search_container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    /* background-color: yellow; */
+    border-radius: 6px;
+    justify-content: space-between;
+    /* padding: 4px 10px; */
+    border: 1px solid lightgrey;
+}
+
+.mobile_search_container input{
+    width: 90%;
+    height: 100%;
+    padding: 6px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+}
+
+.mobile_search_icon_container{
+    width: 8%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightgrey;
+}
+
 
 /* End of Media Query Styling For Desktop Device */
 
@@ -289,13 +331,11 @@
 /* End of Media Query Styling for Tablet Device */
 /* Media Query Styling for Tablet Device */
 
-@media only screen and (max-width: 760px) {}
+@media only screen and (max-width: 768px) {
+    .mobile_search_body{
+        display: flex;
+    }
 
-/* End of Media Query Styling for Tablet Device */
-
-/* Media Query Styling for Mobile Device */
-
-@media only screen and (max-width: 480px) {
     .HeaderWrapper {
         /* background: yellow; */
         padding: 10px 16px;
@@ -315,10 +355,6 @@
         display: none;
         
     }
-
-    .Search {
-        font-size: 22px;
-   }
 
     .SodLogo {
         width: 20%;
@@ -340,6 +376,21 @@
     .AmountContainer{
         display: none;
     }
+    .NavsContainer {
+       & .Search {
+            display: none;
+            /* font-size: 22px; */
+       }
+    }
+    
+}
+
+/* End of Media Query Styling for Tablet Device */
+
+/* Media Query Styling for Mobile Device */
+
+@media only screen and (max-width: 480px) {
+    
 }
 
 @media only screen and (max-width: 379px) {}

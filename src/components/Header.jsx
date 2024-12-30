@@ -124,6 +124,16 @@ const Header = () => {
                 </div>
             </div>
         </article>
+        <div className='mobile_search_body'>
+            <div className='mobile_search_container'>
+                <div className='mobile_search_icon_container'>
+                    <IoSearch/> 
+                </div>
+                <input
+                    type='text'
+                />
+            </div>
+        </div>
     </main>
   )
 }
