@@ -37,7 +37,7 @@ const MyLandingPage = () => {
             <button onClick={()=> navigate("/new-arrivals")}>View All <MdKeyboardArrowRight size={20}/></button>
           </div>
           <div className='landing_page_new_arrivals_bottom_container'>
-            <ProductCard limit={4}/>
+            <ProductCard limit={5}/>
           </div>
         </section>
         <section className='landing_page_special_offer_body'>
