@@ -1,23 +1,30 @@
 import React, { useState } from 'react'
 import './pagesCss/product.css'
 import singlet_black from '../assets/singlet_black.png'
+import { products } from '../components/Theproduct'
+import { useParams } from 'react-router-dom'
 
 const Product = () => {
 
+    const {id} = useParams()
     const [quantity, setQuantity] = useState(1)
     const [selectedSize, setSelectedSize] = useState("")
     const [stockAvailability, setStockAvailability] = useState(false)
+
+    const selectedProduct = products.find(product => product.id === Number(id));
+
+    console.log(selectedProduct)
 
   return (
     <>
         <div className='product_details_body'>
             <div className='product_details_container'>
                 <div className='product_details_image_container'>
-                    <img src={singlet_black} alt=''/>
+                    <img src={selectedProduct.image} alt=''/>
                 </div>
                 <div className='product_details_information_container'>
-                    <h1>ISBx Center Logo Tank Top / Black</h1>
-                    <h3>201,025.00₦ VAT</h3>
+                    <h1>{selectedProduct.desc}</h1>
+                    <h3>{selectedProduct.amount}</h3>
                     <p>Sizes</p>
                     <select value={selectedSize} onChange={(e)=>setSelectedSize(e.target.value)}>
                         <option value="">Choose an option</option>
