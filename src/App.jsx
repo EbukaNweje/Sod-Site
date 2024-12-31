@@ -8,6 +8,7 @@ import Product from './page/Product'
 import ProductCategory from './page/ProductCategory'
 import Login from './onBoarding/Login'
 import Register from './onBoarding/Register'
+import Cart from './page/Cart'
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
           <Route path='/new-arrivals' element={<NewArrivals/>}/>
           <Route path='/product/:id' element={<Product/>}/>
           <Route path='/product-category/:category' element={<ProductCategory/>}/>
+          <Route path='/cart' element={<Cart/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

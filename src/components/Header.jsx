@@ -98,7 +98,7 @@ const Header = () => {
                     <div className='dollar'>0.00<FaDollarSign/></div>
                 </div>
 
-                <div className='CartBag'>
+                <div className='CartBag' onClick={()=> navigate("/cart")}>
                     <IoCart className='myCartIcon'/>
                     <div className='CartBagNum'>0</div>
                 </div>

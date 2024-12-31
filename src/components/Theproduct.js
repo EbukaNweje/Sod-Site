@@ -15,6 +15,7 @@ import sod_orginal_stay_rich_pink_t_shirt from '../assets/sod_orginal_stay-rich_
 import sod_orginal_stop_being_insecure_logo_t_shirt from '../assets/sod_orginal_stop_being_insecure_logo_t-shirt.png';
 import sod_orginal_v_stripe_shorts from '../assets/sod_orginal_v-stripe_shorts.png';
 import sod_orginal_2_in_1_short_sleeved_t_shirt_and_pant_sets from '../assets/sod_orginal_2_in_1_short_sleeved_t_shirt_and_pant_sets.png';
+import sod_orginal_snake_design_logo_pair_t_shirt_and_shorts from '../assets/sod_orginal_snake_design_logo_pair_t_shirt_and_shorts.png';
 
 export const products = [
   {
@@ -85,36 +86,42 @@ export const products = [
   },
   {
     id: 12,
+    image: sod_orginal_snake_design_logo_pair_t_shirt_and_shorts,
+    desc: "Sod Orginal Snake-design-logo pair T-shirt and Shorts",
+    amount: "129,000.00₦ VAT",
+  },
+  {
+    id: 13,
     image: sod_orginal_rosary_design_t_shirt,
     desc: "Sod Orginal rosary-design T-shirt",
     amount: "129,000.00₦ VAT",
   },
   {
-    id: 13,
+    id: 14,
     image: sod_orginal_signature_500_t_shirt,
     desc: "Sod Orginal signature-500 T-shirt",
     amount: "129,000.00₦ VAT",
   },
   {
-    id: 14,
+    id: 15,
     image: sod_orginal_signature_socks_white,
     desc: "Sod Orginal signature Socks white",
     amount: "129,000.00₦ VAT",
   },
   {
-    id: 15,
+    id: 16,
     image: sod_orginal_stay_rich_pink_t_shirt,
     desc: "Sod Orginal stay-rich pink T-shirt",
     amount: "129,000.00₦ VAT",
   },
   {
-    id: 16,
+    id: 17,
     image: sod_orginal_stop_being_insecure_logo_t_shirt,
     desc: "Sod Orginal stop-being-insecure logo T-shirt",
     amount: "129,000.00₦ VAT",
   },
   {
-    id: 17,
+    id: 18,
     image: sod_orginal_v_stripe_shorts,
     desc: "Sod Orginal v-stripe Shorts",
     amount: "129,000.00₦ VAT",
