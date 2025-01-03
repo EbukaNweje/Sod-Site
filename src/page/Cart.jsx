@@ -4,8 +4,12 @@ import sod_orginal_snake_design_logo_pair_t_shirt_and_shorts from '../assets/sod
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { FiMinus } from "react-icons/fi";
 import { MdAdd } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
+
+    const navigate = useNavigate()
+
   return (
     <>
         <main className='cart_page_main_body'>
@@ -47,12 +51,16 @@ const Cart = () => {
                     <div className='cart_summary_top'>
                         <h3>CART SUMMARY</h3>
                     </div>
+                    {/* <div className='cart_summary_middle'>
+                        <p>Item's total (1)</p>
+                        <h3>129,000.00₦ VAT</h3>
+                    </div> */}
                     <div className='cart_summary_middle'>
                         <p>Subtotal</p>
                         <h3>129,000.00₦ VAT</h3>
                     </div>
                     <div className='cart_summary_btn_container'>
-                        <button>Checkout</button>
+                        <button onClick={()=>navigate("/checkout")}>Checkout</button>
                     </div>
                 </section>
             </article>

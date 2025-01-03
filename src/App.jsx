@@ -9,6 +9,7 @@ import ProductCategory from './page/ProductCategory'
 import Login from './onBoarding/Login'
 import Register from './onBoarding/Register'
 import Cart from './page/Cart'
+import Checkout from './page/Checkout'
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
           <Route path='/product/:id' element={<Product/>}/>
           <Route path='/product-category/:category' element={<ProductCategory/>}/>
           <Route path='/cart' element={<Cart/>}/>
+          <Route path='/checkout' element={<Checkout/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
