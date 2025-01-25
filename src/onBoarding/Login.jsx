@@ -4,6 +4,8 @@ import sodlogo_white from '../assets/sodlogo-white.jpg'
 import { useNavigate } from 'react-router-dom';
 import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
@@ -21,10 +23,32 @@ const Login = () => {
         setValues({...values, [name]: value})
     }
 
+    async function submitLogin (e){
+        e.preventDefault();
+        const url = "https://sod-back-end.vercel.app/api/login"
+        const body = values
+        try {
+          setLoading(true)
+          const response = await axios.post(url,body)
+          setLoading(false)
+          console.log(response)
+          toast.success(response)
+        } catch (error){
+          setLoading(false)
+          console.log(error)
+          if(error.message == "Network Error"){
+            console.log("oops! Network error")
+            toast.error("oops! Network error")
+          }else{
+            toast.error(error.response.message)
+          }
+        }
+    }
+
   return (
     <>
         <div className='onboarding_body'>
-            <form className='onboarding_item_container'>
+            <form onSubmit={submitLogin} className='onboarding_item_container'>
                 <div className='onboarding_item_top'>
                     <div className='onboarding_logo_container' onClick={()=>navigate("/")}>
                         <img src={sodlogo_white} alt='logo'/>
@@ -66,7 +90,7 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
-                <button className='onboarding_item_button'>Login</button>
+                <button type='submit' className='onboarding_item_button'>{loading == true ? "loading..." : "Login"}</button>
                 <p className='onboarding_item_link'>Don't have an account? <span onClick={()=>navigate("/register")}>Signup</span></p>
             </form>
         </div>
