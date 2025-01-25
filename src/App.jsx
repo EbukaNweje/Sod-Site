@@ -10,25 +10,31 @@ import Login from './onBoarding/Login'
 import Register from './onBoarding/Register'
 import Cart from './page/Cart'
 import Checkout from './page/Checkout'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <ScrollToTop/>
-      <Routes>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/register' element={<Register/>}/>
-        <Route element={<MainLanding/>}>
-          <Route path='/' element={<MyLandingPage/>}/>
-          <Route path='/new-arrivals' element={<NewArrivals/>}/>
-          <Route path='/product/:id' element={<Product/>}/>
-          <Route path='/product-category/:category' element={<ProductCategory/>}/>
-          <Route path='/cart' element={<Cart/>}/>
-          <Route path='/checkout' element={<Checkout/>}/>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <>
+      <ToastContainer />
+      <BrowserRouter>
+        <ScrollToTop/>
+        <Routes>
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/register' element={<Register/>}/>
+          <Route element={<MainLanding/>}>
+            <Route path='/' element={<MyLandingPage/>}/>
+            <Route path='/new-arrivals' element={<NewArrivals/>}/>
+            <Route path='/product/:id' element={<Product/>}/>
+            <Route path='/product-category/:category' element={<ProductCategory/>}/>
+            <Route path='/cart' element={<Cart/>}/>
+            <Route path='/checkout' element={<Checkout/>}/>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
+
   )
 }
 
