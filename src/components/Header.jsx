@@ -12,10 +12,21 @@ import SodLogo from "../assets/sodlogo.png"
 import { Link, useNavigate } from 'react-router-dom';
 import { FaRegUser } from "react-icons/fa6";
 import { BsShopWindow } from "react-icons/bs";
+import { GiTopHat } from 'react-icons/gi';
+import { useSelector } from "react-redux";
+import {useDispatch} from 'react-redux'
+import { signOut, UserId } from './global/features';
+import axios from 'axios';
+import { useCallback } from 'react';
+import { MdPayment } from "react-icons/md";
+
 
 const Header = () => {
-
+    const dispatch = useDispatch()
     const navigate = useNavigate()
+    const id = useSelector((state) => state?.id);
+
+    // console.log("this is id", {id})
 
     const [drop, setDrop] = useState(false)
     const [search, setSearch] = useState(false)
@@ -27,7 +38,7 @@ const Header = () => {
     }
     const ShowSearchInput = () => {
         setSearch(!search)
-    }
+    } 
 
    
     useEffect(()=>{
@@ -46,6 +57,50 @@ const Header = () => {
     }, [changeScale])
 
 
+    const logOut = () => {
+        dispatch(signOut())
+        navigate("/")
+    }
+
+
+    const [userdata, setUserdata] = useState()
+    const url = `https://sod-back-end.vercel.app/api/`;
+
+    // console.log()
+
+    const getUserInfo = useCallback(async () => {
+        if (!id) return; // ✅ Prevent unnecessary API calls
+        try {
+            const res = await axios.get(`${`${url}oneuserdata/${id}`}`);
+            setUserdata(res?.data?.data);
+            // console.log(res);
+        } catch (error) {
+            console.log(error);
+        }
+    }, []); // ✅ Depend only on `id`
+
+    //  console.log("this is userdata", userdata)
+
+    const [category, setCategory] = useState()
+
+    const getAllCategory = async() => {
+        try{
+            
+            const res = await axios.get(`${`${url}getallcartegory`}`)
+            setCategory(res.data.data)
+
+        }catch(err) {
+            console.log(err)
+        }
+    }
+
+
+    useEffect(() => {
+        getUserInfo();
+        getAllCategory()
+    }, [getUserInfo]); 
+
+   
 
   return (
     <main className='MainBody'>
@@ -65,15 +120,11 @@ const Header = () => {
                     
                     { drop ? 
                         <div className='DropList' onMouseLeave={ShowDrop} >
-                            <Link to = {`/product-category/Clothing`} className='dropList_link'>Clothing</Link>
-                            <Link to = {`/product-category/Denim`} className='dropList_link'>Denim</Link>
-                            <Link to = {`/product-category/Shirts`} className='dropList_link'>Shirts</Link>
-                            <Link to = {`/product-category/Caps`} className='dropList_link'>Caps</Link>
-                            <Link to = {`/product-category/Pants`} className='dropList_link'>Pants</Link>
-                            <Link to = {`/product-category/Hoodies`} className='dropList_link'>Hoodies</Link>
-                            <Link to = {`/product-category/Slides`} className='dropList_link'>Slides</Link>
-                            <Link to = {`/product-category/Men`} className='dropList_link'>Men</Link>
-                            <Link to = {`/product-category/Women`} className='dropList_link'>Women</Link>
+                            {
+                                category.map((props)=>( 
+                                <Link to = {`/product-category/${props.categoryName}`} className='dropList_link'>{props.categoryName}</Link>
+                                ))
+                            }
                         </div> 
                         : 
                         null
@@ -94,8 +145,8 @@ const Header = () => {
             </div>
             <div className='cartContainer'>
                 <div className='AmountContainer'>
-                    <div className='Naira'>0.00<TbCurrencyNaira/></div>
-                    <div className='dollar'>0.00<FaDollarSign/></div>
+                    <div className='Naira'>{id ? userdata?.balance : "0.00"}<TbCurrencyNaira/></div>
+                    <div className='dollar'>{id ? userdata?.balance : "0.00"}<FaDollarSign/></div>
                 </div>
 
                 <div className='CartBag' onClick={()=> navigate("/cart")}>
@@ -109,15 +160,40 @@ const Header = () => {
                         showAccountListing == true ?
 
                             <div className='account_listing_container'>
-                                <div className='header_signin_btn'><button onClick={()=>navigate("/login")}>Sign In</button></div>
+                                {
+                                    id ?  null : <div className='header_signin_btn'><button onClick={()=>navigate("/login")}>Sign In</button></div>
+                                }
+                               
+                               {
+                                id ?   <div className='account_listing_link'>
+                                {/* <FaRegUser size={16}/> */}
+                                <p 
+                                style={{
+                                    marginLeft: '20px'
+                                }}
+                                >Hello {userdata?.username}</p>
+                            </div> : null
+                               }
+                               {
+
+                               }
                                 <div className='account_listing_link'>
                                     <FaRegUser size={16}/>
                                     <p>My Account</p>
                                 </div>
+                                  
                                 <div className='account_listing_link'>
                                     <BsShopWindow size={16}/>
-                                    <p>Orders</p>
+                                    <p>History</p>
                                 </div>
+                                {
+                                    id ? <div className='account_listing_link'>
+                                    <p style={{
+                                        color: "red",
+                                        marginLeft: '20px'
+                                    }} onClick={logOut}>Log out</p>
+                                </div> : null
+                                }
                             </div>
                         : null
                     }
