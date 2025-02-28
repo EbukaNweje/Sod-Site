@@ -88,6 +88,7 @@ const Header = () => {
             
             const res = await axios.get(`${`${url}getallcartegory`}`)
             setCategory(res.data.data)
+            console.log(res)
 
         }catch(err) {
             console.log(err)
@@ -177,12 +178,12 @@ const Header = () => {
                                {
 
                                }
-                                <div className='account_listing_link'>
+                                <div onClick={()=>navigate('Adminpage')} className='account_listing_link'>
                                     <FaRegUser size={16}/>
                                     <p>My Account</p>
                                 </div>
                                   
-                                <div className='account_listing_link'>
+                                <div onClick={()=>navigate('history')} className='account_listing_link'>
                                     <BsShopWindow size={16}/>
                                     <p>History</p>
                                 </div>

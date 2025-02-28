@@ -12,6 +12,13 @@ import Cart from './page/Cart'
 import Checkout from './page/Checkout'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import History from './page/History'
+import Adminlogin from './onBoarding/Adminlogin'
+import Adminpage from './page/Admin/Adminpage'
+import Adminland from './page/Admin/Adminland'
+import AddProduct from './page/Admin/AddProduct'
+import Allproduct from './page/Admin/Allproduct'
+import Order from './page/Admin/Order'
 
 
 const App = () => {
@@ -22,6 +29,7 @@ const App = () => {
         <ScrollToTop/>
         <Routes>
           <Route path='/login' element={<Login/>}/>
+          <Route path='/admin-login' element={<Adminlogin/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route element={<MainLanding/>}>
             <Route path='/' element={<MyLandingPage/>}/>
@@ -30,8 +38,15 @@ const App = () => {
             <Route path='/product/:id' element={<Product/>}/>
             <Route path='/product-category/:category' element={<ProductCategory/>}/>
             <Route path='/cart' element={<Cart/>}/>
+            <Route path='/history' element={<History/>}/>
             <Route path='/checkout' element={<Checkout/>}/>
           </Route>
+          <Route path='/adminpage' element={<Adminland />}>
+          <Route index element={<Adminpage />} />
+          <Route path='add-product' element={<AddProduct/>} />
+          <Route path='all-products' element={<Allproduct/>}/>
+          <Route path='all-orders' element={<Order/>}/>
+        </Route>
         </Routes>
       </BrowserRouter>
     </>

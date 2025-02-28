@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import {useDispatch} from 'react-redux'
 import { UserId } from '../components/global/features';
 
-const Login = () => {
+const Adminlogin = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
@@ -83,7 +83,7 @@ const Login = () => {
         
         toast.success(res.data.message)
         dispatch(UserId(res?.data?.data?._id))
-        navigate(`/${res?.data?.data?.username}`)
+        navigate(`/Adminpage/${res?.data?.data?.username}`)
         // console.log(res)
   
       }catch(error){
@@ -110,7 +110,7 @@ const Login = () => {
                     <div className='onboarding_logo_container' onClick={()=>navigate("/")}>
                         <img src={sodlogo_white} alt='logo'/>
                     </div>
-                    <h3>Welcome back!</h3>
+                    <h3>Welcome back Admin!</h3>
                     <p>Log back into your Jumia account.</p>
                 </div>
                 <div className='onboarding_item_inputs_container'>
@@ -164,11 +164,11 @@ const Login = () => {
                            background: isdisabled ? "lightgray" : "black"
                          }}
                 >{loading == true ? "loading..." : "Login"}</button>
-                <p className='onboarding_item_link'>Don't have an account? <span onClick={()=>navigate("/register")}>Signup</span></p>
+                {/* <p className='onboarding_item_link'>Don't have an account? <span onClick={()=>navigate("/register")}>Signup</span></p> */}
             </form>
         </div>
     </>
   )
 }
 
-export default Login
+export default Adminlogin
