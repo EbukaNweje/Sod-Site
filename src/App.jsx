@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 import MainLanding from './page/MainLanding'
 import MyLandingPage from './page/MyLandingPage'
 import NewArrivals from './page/NewArrivals'
@@ -26,7 +26,7 @@ const App = () => {
   return (
     <>
       <ToastContainer />
-      <BrowserRouter>
+      <HashRouter>
         <ScrollToTop/>
         <Routes>
           <Route path='/login' element={<Login/>}/>
@@ -51,7 +51,7 @@ const App = () => {
         {/* </Route> */}
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </>
 
   )
