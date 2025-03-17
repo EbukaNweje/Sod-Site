@@ -4,13 +4,15 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 const AdminPage = () => {
-  const [user, setUser] = useState(null)
-  const userId = useSelector((state)=> state.id)
+  const [admin, setAdmin] = useState(null)
+  const id = useSelector((state)=> state.id)
+  console.log(id)
 
   const getOne = async() =>{
     try{
-      const res = await axios.get(`https://sod-back-end.vercel.app/admindata/${userId} `)
+      const res = await axios.get(`https://sod-back-end.vercel.app/api/admindata/${id} `)
       console.log(res)
+      setAdmin(res?.data)
     }
     catch (error){
       console.error('Error fetching user data:', error);
@@ -18,8 +20,8 @@ const AdminPage = () => {
   }
 
   useEffect(() => {
-   if (userId) getOne();
-  }, [userId])
+   if (id) getOne();
+  }, [id])
   
 
   const adminData = {
@@ -27,7 +29,7 @@ const AdminPage = () => {
     role: "Super Admin",
     email: "admin@example.com",
     phone: "+234 801 234 5678",
-    username: "admin123",
+    username: "admin",
     profilePic: "https://via.placeholder.com/150", 
     lastLogin: "February 27, 2025",
     actions: ["Updated product listings", "Approved order #4567", "Added new admin"],
@@ -36,9 +38,9 @@ const AdminPage = () => {
   return (
     <div className="AdminPage">
       <div className="admin-profile">
-        <img src={adminData.profilePic} alt="Admin" className="admin-pic" />
+        {/* <img src={adminData.profilePic} alt="Admin" className="admin-pic" /> */}
       <div className="admin-info">
-      <h2>{adminData.name}</h2>
+      <h2>{admin?.fullName}</h2>
       <p>{adminData.role}</p>
       </div>
       </div>
@@ -46,7 +48,7 @@ const AdminPage = () => {
 
       <div className="admin-details">
         <h3>Account Information</h3>
-        <p><strong>Email:</strong> {adminData.email}</p>
+        <p><strong>Email:</strong> {admin?.email}</p>
         <p><strong>Phone:</strong> {adminData.phone}</p>
         <p><strong>Username:</strong> {adminData.username}</p>
         <p><strong>Last Login:</strong> {adminData.lastLogin}</p>

@@ -1,23 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./AdminCss/Order.css"; 
 import axios from "axios";
 
 const Order = () => {
   const [orders, setOrders] = useState([
-    {
-      id: 1,
-      date: "2025-02-28",
-      totalProducts: 3,
-      totalPrice: 15000,
-      status: "Pending",
-    },
-    {
-      id: 2,
-      date: "2025-02-27",
-      totalProducts: 2,
-      totalPrice: 10000,
-      status: "Pending",
-    },
+    // {
+    //   id: 1,
+    //   date: "2025-02-28",
+    //   totalProducts: 3,
+    //   totalPrice: 15000,
+    //   status: "Pending",
+    // },
+    // {
+    //   id: 2,
+    //   date: "2025-02-27",
+    //   totalProducts: 2,
+    //   totalPrice: 10000,
+    //   status: "Pending",
+    // },
   ]);
 
   const toggleStatus = (id) => {
