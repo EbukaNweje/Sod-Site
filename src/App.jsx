@@ -19,6 +19,7 @@ import Adminland from './page/Admin/Adminland'
 import AddProduct from './page/Admin/AddProduct'
 import Allproduct from './page/Admin/Allproduct'
 import Order from './page/Admin/Order'
+import PrivateRoute from './components/PrivateRoute'
 
 
 const App = () => {
@@ -41,12 +42,14 @@ const App = () => {
             <Route path='/history' element={<History/>}/>
             <Route path='/checkout' element={<Checkout/>}/>
           </Route>
-          <Route path='/adminpage' element={<Adminland />}>
+        {/* <Route element={<PrivateRoute/>}> */}
+        <Route path='/adminpage' element={<Adminland />}>
           <Route index element={<Adminpage />} />
           <Route path='add-product' element={<AddProduct/>} />
           <Route path='all-products' element={<Allproduct/>}/>
           <Route path='all-orders' element={<Order/>}/>
-        </Route>
+        {/* </Route> */}
+          </Route>
         </Routes>
       </BrowserRouter>
     </>

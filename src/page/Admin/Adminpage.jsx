@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./AdminCss/Adminland.css";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const AdminPage = () => {
+  const [user, setUser] = useState(null)
+  const userId = useSelector((state)=> state.id)
+
+  const getOne = async() =>{
+    try{
+      const res = await axios.get(`https://sod-back-end.vercel.app/admindata/${userId} `)
+      console.log(res)
+    }
+    catch (error){
+      console.error('Error fetching user data:', error);
+    }
+  }
+
+  useEffect(() => {
+   if (userId) getOne();
+  }, [userId])
+  
+
   const adminData = {
     name: "John Doe",
     role: "Super Admin",

@@ -178,7 +178,7 @@ const Header = () => {
                                {
 
                                }
-                                <div onClick={()=>navigate('Adminpage')} className='account_listing_link'>
+                                <div onClick={()=>navigate('admin-login')} className='account_listing_link'>
                                     <FaRegUser size={16}/>
                                     <p>My Account</p>
                                 </div>

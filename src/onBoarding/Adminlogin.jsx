@@ -70,7 +70,7 @@ const Adminlogin = () => {
     },[values])
 
 
-    const url = "https://sod-back-end.vercel.app/api/login"
+    const url = "https://sod-back-end.vercel.app/api/admin-login"
 
     async function submitLogin (e) {
       e.preventDefault();
@@ -83,7 +83,8 @@ const Adminlogin = () => {
         
         toast.success(res.data.message)
         dispatch(UserId(res?.data?.data?._id))
-        navigate(`/Adminpage/${res?.data?.data?.username}`)
+        navigate(`/adminpage`)
+        console.log("res", res.data)
         // console.log(res)
   
       }catch(error){

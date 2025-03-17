@@ -1,92 +1,156 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import "./AdminCss/Product.css";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { toast } from "react-toastify";
-
-const productSchema = z.object({
-  productName: z.string().min(2, "Product name must be at least 2 characters"),
-  sizes: z.array(z.string().min(1)).nonempty("At least one size is required"),
-  amount: z.number().min(1, "Amount must be greater than zero"),
-  productImage: z.instanceof(FileList),
-});
+import "./AdminCss/Product.css"
 
 const AddProduct = () => {
   const [preview, setPreview] = useState(null);
-  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm({
-    resolver: zodResolver(productSchema),
-    defaultValues: {
-        sizes: []  
-      }
-    
+  const [loading, setLoading] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [sizes, setSizes] = useState([]);
+  const [errors, setErrors] = useState({});
+  const [formData, setFormData] = useState({
+    productName: "",
+    sizeInput: "",
+    amount: "",
+    quantity: "",
+    category: "",
+    description: "",
+    productImage: null,
   });
 
-  const [sizes, setSizes] = useState([]);
-  const sizeInput = watch("sizeInput");
+  useEffect(() => {
+    const getAllCategories = async () => {
+      try {
+        const response = await axios.get("https://sod-back-end.vercel.app/api/getallcartegory");
+        setCategories(response.data.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+    getAllCategories();
+  }, []);
+
+  const validateForm = () => {
+    let newErrors = {};
+    if (!formData.productName.trim()) newErrors.productName = "Product name is required";
+    if (sizes.length === 0) newErrors.sizes = "At least one size is required";
+    if (!formData.amount || formData.amount <= 0) newErrors.amount = "Amount must be greater than zero";
+    if (!formData.quantity || formData.quantity <= 0) newErrors.quantity = "Quantity must be at least 1";
+    if (!formData.category) newErrors.category = "Category is required";
+    if (!formData.description || formData.description.length < 10) newErrors.description = "Description must be at least 10 characters";
+    if (!formData.productImage) newErrors.productImage = "Product image is required";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleAddSize = () => {
-    if (sizeInput && !sizes.includes(sizeInput)) {
-      const updatedSizes = [...sizes, sizeInput];
-      setSizes(updatedSizes);
-      setValue("sizes", updatedSizes); 
-      setValue("sizeInput", ""); 
+    if (formData.sizeInput.trim() && !sizes.includes(formData.sizeInput.trim())) {
+      setSizes([...sizes, formData.sizeInput.trim()]);
+      setFormData({ ...formData, sizeInput: "" });
     }
   };
 
   const handleRemoveSize = (size) => {
-    const newSizes = sizes.filter((s) => s !== size);
-    setSizes(newSizes);
-    setValue("sizes", newSizes); 
+    setSizes(sizes.filter((s) => s !== size));
+  };
+
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setPreview(URL.createObjectURL(file));
+  //     setFormData({ ...formData, productImage: file.name }); // Save only image name as string
+  //   }
+  // };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       setPreview(URL.createObjectURL(file));
-      setValue("productImage", e.target.files);
+      setFormData({ ...formData, productImage: file }); 
     }
+    console.log("Selected image file:", file);
   };
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+  
+    setLoading(true);
+  console.log(formData);
+  const productData = new FormData();
+  productData.append("name", formData.productName);
+  productData.append("price", formData.amount);
+  productData.append("category", formData.category);
+  productData.append("quantity", formData.quantity);
+  productData.append("description", formData.description);
+  productData.append("size", JSON.stringify(sizes));
+  
+  // if (formData.productImage) {
+  //   productData.append("image", formData.productImage);
+  // }
+  
+  // Log each value
+  for (let pair of productData.entries()) {
+    console.log(pair[0] + ": " + pair[1]);
+  }
+  
+  
+    console.log("formData before appending:", formData);
 
-  const onSubmit = async (data) => {
-    const formData = new FormData();
-    formData.append("productName", data.productName);
-    formData.append("amount", data.amount);
-    sizes.forEach((size) => formData.append("sizes[]", size));
-    if (data.productImage?.length) {
-      formData.append("productImage", data.productImage[0]);
-    }
-
+      console.log("productData", productData);
+      
+  
     try {
-      const response = await fetch("https://api.example.com/products", {
-        method: "POST",
-        body: formData,
+      const Token = localStorage.getItem("authToken");
+      const url = "https://sod-back-end.vercel.app/api/addProduct";
+      const response = await axios.post(url, productData, {
+        headers: {
+          "Authorization": `header ${Token}`,
+          // "Content-Type": "multipart/form-data",
+        },
       });
-
-      if (!response.ok) {
-        throw new Error("Failed to add product");
-      }
-
+  
+      if (response.status !== 200) throw new Error("Failed to add product");
+  
+      setLoading(false);
       toast.success("Product added successfully!");
+      setFormData({
+        productName: "",
+        sizeInput: "",
+        amount: "",
+        quantity: "",
+        category: "",
+        description: "",
+        productImage: null,
+      });
+      setSizes([]);
+      setPreview(null);
     } catch (error) {
+      setLoading(false);
       toast.error(error.message);
     }
   };
+  
 
   return (
     <div className="add-product">
       <h2>Add Product</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Product Name</label>
-          <input type="text" {...register("productName")} />
-          {errors.productName && <p className="error">{errors.productName.message}</p>}
+          <input type="text" name="productName" value={formData.productName} onChange={handleChange} />
+          {errors.productName && <p className="error">{errors.productName}</p>}
         </div>
 
         <div className="form-group">
           <label>Available Sizes</label>
           <div className="size-input">
-            <input type="text" {...register("sizeInput")} />
+            <input type="text" name="sizeInput" value={formData.sizeInput} onChange={handleChange} />
             <button type="button" onClick={handleAddSize}>Add</button>
           </div>
           <div className="size-list">
@@ -96,30 +160,59 @@ const AddProduct = () => {
               </span>
             ))}
           </div>
-          {errors.sizes && <p className="error">{errors.sizes.message}</p>}
+          {errors.sizes && <p className="error">{errors.sizes}</p>}
         </div>
 
         <div className="form-group">
           <label>Product Amount (₦)</label>
-          <input type="number" {...register("amount", { valueAsNumber: true })} />
-          {errors.amount && <p className="error">{errors.amount.message}</p>}
+          <input type="number" name="amount" value={formData.amount} onChange={handleChange} />
+          {errors.amount && <p className="error">{errors.amount}</p>}
+        </div>
+
+        <div className="form-group">
+          <label>Quantity</label>
+          <input type="number" name="quantity" value={formData.quantity} onChange={handleChange} />
+          {errors.quantity && <p className="error">{errors.quantity}</p>}
+        </div>
+
+        <div className="form-group">
+          <label>Category</label>
+          <select name="category" value={formData.category} onChange={handleChange}>
+            <option value="">Select a category</option>
+            {categories.map((cat) => (
+              <option key={cat._id} value={cat._id}>
+                {cat.categoryName}
+              </option>
+            ))}
+          </select>
+          {errors.category && <p className="error">{errors.category}</p>}
+        </div>
+
+        <div className="form-group">
+          <label>Description</label>
+          <textarea name="description" rows="4" value={formData.description} onChange={handleChange}></textarea>
+          {errors.description && <p className="error">{errors.description}</p>}
         </div>
 
         <div className="form-group">
           <label>Product Image</label>
           <input type="file" accept="image/*" onChange={handleImageChange} />
           {preview && <img src={preview} alt="Preview" className="image-preview" />}
+          {errors.productImage && <p className="error">{errors.productImage}</p>}
         </div>
 
         <div className="preview">
           <h3>Preview</h3>
-          <p><strong>Name:</strong> {watch("productName")}</p>
+          <p><strong>Name:</strong> {formData.productName}</p>
           <p><strong>Sizes:</strong> {sizes.join(", ")}</p>
-          <p><strong>Amount:</strong> ₦{watch("amount") || 0}</p>
-          {preview && <img src={preview} alt="Preview" />}
+          <p><strong>Amount:</strong> ₦{formData.amount || 0}</p>
+          <p><strong>Quantity:</strong> {formData.quantity || 0}</p>
+          <p><strong>Category:</strong> {formData.category}</p>
+          <p><strong>Description:</strong> {formData.description}</p>
+          {/* {preview && <img src={preview} alt="Preview" />} */}
         </div>
 
-        <button type="submit" className="submit-btn">Add Product</button>
+        <button type="submit" className="submit-btn">{loading ? "Loading..." : "Add Product"}</button>
       </form>
     </div>
   );

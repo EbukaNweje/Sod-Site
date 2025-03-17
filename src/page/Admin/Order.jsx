@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./AdminCss/Order.css"; 
+import axios from "axios";
 
 const Order = () => {
   const [orders, setOrders] = useState([
@@ -28,6 +29,27 @@ const Order = () => {
       )
     );
   };
+
+const getAllOrders = async () => {
+  try {
+    const response = await axios.get("https://sod-back-end.vercel.app/api/getallproducts");
+    
+    if (response.status === 200) {
+      console.log("Products fetched successfully:", response.data.data);
+      return response.data.data; 
+    } else {
+      throw new Error("Failed to fetch products");
+    }
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return []; 
+  }
+};
+
+useEffect(() => {
+  getAllOrders()
+}, [])
+
 
   return (
     <div className='orderContainer'>

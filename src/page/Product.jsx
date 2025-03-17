@@ -5,13 +5,13 @@ import { products } from "../components/Theproduct";
 import { useParams } from "react-router-dom";
 
 const Product = () => {
-  const { id } = useParams();
+  const { Id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState("");
   const [loading, setLoading] = useState(false); 
   const [message, setMessage] = useState(""); 
 
-  const selectedProduct = products.find((product) => product.id === Number(id));
+  const selectedProduct = products.find((product) => product.id === Number(Id));
 
   const addToCart = async () => {
     if (!selectedSize) {
@@ -24,20 +24,29 @@ const Product = () => {
 
     const cartItem = {
       productId: selectedProduct.id,
-      name: selectedProduct.desc,
-      price: selectedProduct.amount,
-      image: selectedProduct.image,
-      quantity: quantity,
-      size: selectedSize,
+      // name: selectedProduct.desc,
+      // price: selectedProduct.amount,
+      // image: selectedProduct.image,
+      quantity: Number(quantity), 
+      // size: selectedSize,
     };
 
+    console.log("cartItem", cartItem)
     try {
-      const response = await axios.post("https://your-api-url.com/cart", cartItem);
+      const response = await axios.post("https://sod-back-end.vercel.app/api/addCart", cartItem);
       setMessage("Product added to cart successfully!");
-    } catch (error) {
-      setMessage("Error adding to cart. Please try again.");
-      console.error("API Error:", error);
-    } finally {
+      console.log(response);
+      
+     }
+      catch (error) {
+        if (error.response) {
+          console.error("Server Error:", error.response.data);
+        } else {
+          console.error("Error:", error);
+        }
+        setMessage("Error adding to cart. Please try again.");
+      }
+       finally {
       setLoading(false);
     }
   };
