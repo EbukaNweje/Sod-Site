@@ -88,7 +88,7 @@ const Header = () => {
             
             const res = await axios.get(`${`${url}getallcartegory`}`)
             setCategory(res.data.data)
-            console.log(res)
+            // console.log(res)
 
         }catch(err) {
             console.log(err)

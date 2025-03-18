@@ -3,6 +3,7 @@ import './componentCss/productCard.css'
 import { IoCart } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import { products } from './Theproduct'
+import axios from 'axios';
 
 const ProductCard = ({limit, categoryCard}) => {
 
@@ -16,9 +17,10 @@ const ProductCard = ({limit, categoryCard}) => {
     try {
       setLoading(true); 
       const response = await axios.get("https://sod-back-end.vercel.app/api/allProduct");
+      console.log("res",response?.data?.data)
 
       if (response.status === 200) {
-        setProducts(response.data.products || []); 
+        setProducts(response.data.data || []); 
       } else {
         console.error("Failed to fetch products");
       }

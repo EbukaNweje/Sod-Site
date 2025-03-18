@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "./AdminCss/Product.css"
+// import * as Yup from "yup";
+
 
 const AddProduct = () => {
   const [preview, setPreview] = useState(null);
@@ -9,15 +11,17 @@ const AddProduct = () => {
   const [categories, setCategories] = useState([]);
   const [sizes, setSizes] = useState([]);
   const [errors, setErrors] = useState({});
+  const [image, setImage] = useState();
   const [formData, setFormData] = useState({
-    productName: "",
-    sizeInput: "",
-    amount: "",
+    name: "",
+    size: "",
+    price: "",
     quantity: "",
     category: "",
     description: "",
-    productImage: null,
   });
+
+  // console.log(formData)
 
   useEffect(() => {
     const getAllCategories = async () => {
@@ -31,23 +35,23 @@ const AddProduct = () => {
     getAllCategories();
   }, []);
 
-  const validateForm = () => {
-    let newErrors = {};
-    if (!formData.productName.trim()) newErrors.productName = "Product name is required";
-    if (sizes.length === 0) newErrors.sizes = "At least one size is required";
-    if (!formData.amount || formData.amount <= 0) newErrors.amount = "Amount must be greater than zero";
-    if (!formData.quantity || formData.quantity <= 0) newErrors.quantity = "Quantity must be at least 1";
-    if (!formData.category) newErrors.category = "Category is required";
-    if (!formData.description || formData.description.length < 10) newErrors.description = "Description must be at least 10 characters";
-    if (!formData.productImage) newErrors.productImage = "Product image is required";
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  // const validateForm = () => {
+  //   let newErrors = {};
+  //   if (!formData.productName.trim()) newErrors.productName = "Product name is required";
+  //   if (sizes.length === 0) newErrors.sizes = "At least one size is required";
+  //   if (!formData.amount || formData.amount <= 0) newErrors.amount = "Amount must be greater than zero";
+  //   if (!formData.quantity || formData.quantity <= 0) newErrors.quantity = "Quantity must be at least 1";
+  //   if (!formData.category) newErrors.category = "Category is required";
+  //   if (!formData.description || formData.description.length < 10) newErrors.description = "Description must be at least 10 characters";
+  //   if (!formData.productImage) newErrors.productImage = "Product image is required";
+  //   setErrors(newErrors);
+  //   return Object.keys(newErrors).length === 0;
+  // };
 
   const handleAddSize = () => {
-    if (formData.sizeInput.trim() && !sizes.includes(formData.sizeInput.trim())) {
-      setSizes([...sizes, formData.sizeInput.trim()]);
-      setFormData({ ...formData, sizeInput: "" });
+    if (formData.size.trim() && !sizes.includes(formData.size.trim())) {
+      setSizes([...sizes, formData.size.trim()]);
+      setFormData({ ...formData, size: formData.size.trim() });
     }
   };
 
@@ -69,64 +73,115 @@ const AddProduct = () => {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setPreview(URL.createObjectURL(file));
-      setFormData({ ...formData, productImage: file }); 
-    }
-    console.log("Selected image file:", file);
+    const save = URL.createObjectURL(file);
+    setPreview(save);
+    setImage(file); // Set the image state to the file object
   };
   
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validateForm()) return;
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!validateForm()) return;
   
-    setLoading(true);
-  console.log(formData);
-  const productData = new FormData();
-  productData.append("name", formData.productName);
-  productData.append("price", formData.amount);
-  productData.append("category", formData.category);
-  productData.append("quantity", formData.quantity);
-  productData.append("description", formData.description);
-  productData.append("size", JSON.stringify(sizes));
+  //   setLoading(true);
+  // console.log(formData);
+  // const productData = new FormData();
+  // productData.append("name", formData.productName);
+  // productData.append("price", formData.amount);
+  // productData.append("category", formData.category);
+  // productData.append("quantity", formData.quantity);
+  // productData.append("description", formData.description);
+  // productData.append("size", JSON.stringify(sizes));
   
-  // if (formData.productImage) {
-  //   productData.append("image", formData.productImage);
+  // // if (formData.productImage) {
+  // //   productData.append("image", formData.productImage);
+  // // }
+  
+  // // Log each value
+  // for (let pair of productData.entries()) {
+  //   console.log(pair[0] + ": " + pair[1]);
   // }
   
-  // Log each value
-  for (let pair of productData.entries()) {
-    console.log(pair[0] + ": " + pair[1]);
-  }
   
-  
-    console.log("formData before appending:", formData);
+  //   console.log("formData before appending:", formData);
 
-      console.log("productData", productData);
+  //     console.log("productData", productData);
       
   
+  //   try {
+  //     const Token = localStorage.getItem("authToken");
+  //     const url = "https://sod-back-end.vercel.app/api/addProduct";
+  //     const response = await axios.post(url, productData, {
+  //       headers: {
+  //         "Authorization": `header ${Token}`,
+  //         // "Content-Type": "multipart/form-data",
+  //       },
+  //     });
+  
+  //     if (response.status !== 200) throw new Error("Failed to add product");
+  
+  //     setLoading(false);
+  //     toast.success("Product added successfully!");
+  //     setFormData({
+  //       productName: "",
+  //       sizeInput: "",
+  //       amount: "",
+  //       quantity: "",
+  //       category: "",
+  //       description: "",
+  //       productImage: null,
+  //     });
+  //     setSizes([]);
+  //     setPreview(null);
+  //   } catch (error) {
+  //     setLoading(false);
+  //     toast.error(error.message);
+  //   }
+  // };
+  
+
+  const addProduct = (async (e) => {
+    e.preventDefault();
+  
     try {
+      const formDatas = new FormData();
+      formDatas.append("name", formData.name);
+      formDatas.append("description", formData.description);
+      formDatas.append("price", formData.price);
+      formDatas.append("quantity", formData.quantity);
+      formDatas.append("image", image); // Append the file object to the FormData
+      formDatas.append("size", formData.size);
+      formDatas.append("category", formData.category);
+  
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data"
+        }
+      }
+
+      console.log("formDatas", formDatas);
+  
+      setLoading(true);
+  
       const Token = localStorage.getItem("authToken");
-      const url = "https://sod-back-end.vercel.app/api/addProduct";
-      const response = await axios.post(url, productData, {
+      const url = "https://sodbackend.onrender.com/api/addProduct";
+      const response = await axios.post(url, formDatas, {
         headers: {
           "Authorization": `header ${Token}`,
-          // "Content-Type": "multipart/form-data",
         },
       });
   
-      if (response.status !== 200) throw new Error("Failed to add product");
+      // if (response.status !== 200) throw new Error("Failed to add product");
   
       setLoading(false);
       toast.success("Product added successfully!");
       setFormData({
-        productName: "",
-        sizeInput: "",
-        amount: "",
+        name: "",
+        size: "",
+        price: "",
         quantity: "",
         category: "",
         description: "",
-        productImage: null,
+        image: null,
       });
       setSizes([]);
       setPreview(null);
@@ -134,23 +189,22 @@ const AddProduct = () => {
       setLoading(false);
       toast.error(error.message);
     }
-  };
-  
+  })
 
   return (
     <div className="add-product">
       <h2>Add Product</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={addProduct}>
         <div className="form-group">
           <label>Product Name</label>
-          <input type="text" name="productName" value={formData.productName} onChange={handleChange} />
+          <input type="text" name="name" value={formData.name} onChange={handleChange} />
           {errors.productName && <p className="error">{errors.productName}</p>}
         </div>
 
         <div className="form-group">
           <label>Available Sizes</label>
           <div className="size-input">
-            <input type="text" name="sizeInput" value={formData.sizeInput} onChange={handleChange} />
+            <input type="text" name="size" value={formData.size} onChange={handleChange} />
             <button type="button" onClick={handleAddSize}>Add</button>
           </div>
           <div className="size-list">
@@ -165,7 +219,7 @@ const AddProduct = () => {
 
         <div className="form-group">
           <label>Product Amount (₦)</label>
-          <input type="number" name="amount" value={formData.amount} onChange={handleChange} />
+          <input type="number" name="price" value={formData.price} onChange={handleChange} />
           {errors.amount && <p className="error">{errors.amount}</p>}
         </div>
 
@@ -203,9 +257,9 @@ const AddProduct = () => {
 
         <div className="preview">
           <h3>Preview</h3>
-          <p><strong>Name:</strong> {formData.productName}</p>
+          <p><strong>Name:</strong> {formData.name}</p>
           <p><strong>Sizes:</strong> {sizes.join(", ")}</p>
-          <p><strong>Amount:</strong> ₦{formData.amount || 0}</p>
+          <p><strong>Amount:</strong> ₦{formData.price || 0}</p>
           <p><strong>Quantity:</strong> {formData.quantity || 0}</p>
           <p><strong>Category:</strong> {formData.category}</p>
           <p><strong>Description:</strong> {formData.description}</p>
