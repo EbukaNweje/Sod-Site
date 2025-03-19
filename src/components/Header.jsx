@@ -24,9 +24,9 @@ import { MdPayment } from "react-icons/md";
 const Header = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const id = useSelector((state) => state?.id);
+    const user = useSelector((state) => state);
 
-    // console.log("this is id", {id})
+    console.log("this is id", {user})
 
     const [drop, setDrop] = useState(false)
     const [search, setSearch] = useState(false)
@@ -69,15 +69,15 @@ const Header = () => {
     // console.log()
 
     const getUserInfo = useCallback(async () => {
-        if (!id) return; // ✅ Prevent unnecessary API calls
+        if (!user?.id) return; // ✅ Prevent unnecessary API calls
         try {
-            const res = await axios.get(`${`${url}oneuserdata/${id}`}`);
+            const res = await axios.get(`${`${url}oneuserdata/${user?.id}`}`);
             setUserdata(res?.data?.data);
             // console.log(res);
         } catch (error) {
             console.log(error);
         }
-    }, []); // ✅ Depend only on `id`
+    }, [user?.id]); // ✅ Depend only on `id`
 
     //  console.log("this is userdata", userdata)
 
@@ -97,9 +97,11 @@ const Header = () => {
 
 
     useEffect(() => {
-        getUserInfo();
         getAllCategory()
-    }, [getUserInfo]); 
+            if (user.id) {
+                getUserInfo();
+            }
+    }, [user.id]); 
 
    
 
@@ -146,8 +148,8 @@ const Header = () => {
             </div>
             <div className='cartContainer'>
                 <div className='AmountContainer'>
-                    <div className='Naira'>{id ? userdata?.balance : "0.00"}<TbCurrencyNaira/></div>
-                    <div className='dollar'>{id ? userdata?.balance : "0.00"}<FaDollarSign/></div>
+                    <div className='Naira'>{user?.id ? userdata?.balance : "0.00"}<TbCurrencyNaira/></div>
+                    <div className='dollar'>{user?.id ? userdata?.balance : "0.00"}<FaDollarSign/></div>
                 </div>
 
                 <div className='CartBag' onClick={()=> navigate("/cart")}>
@@ -162,11 +164,11 @@ const Header = () => {
 
                             <div className='account_listing_container'>
                                 {
-                                    id ?  null : <div className='header_signin_btn'><button onClick={()=>navigate("/login")}>Sign In</button></div>
+                                    user?.id ?  null : <div className='header_signin_btn'><button onClick={()=>navigate("/login")}>Sign In</button></div>
                                 }
                                
                                {
-                                id ?   <div className='account_listing_link'>
+                                user?.id ?   <div className='account_listing_link'>
                                 {/* <FaRegUser size={16}/> */}
                                 <p 
                                 style={{
@@ -178,9 +180,12 @@ const Header = () => {
                                {
 
                                }
-                                <div onClick={()=>navigate('admin-login')} className='account_listing_link'>
+                                <div className='account_listing_link'>
                                     <FaRegUser size={16}/>
-                                    <p>My Account</p>
+                                 {
+                                    user?.isLoggedIn ? <p onClick={()=> navigate(`/adminpage`)}> Back to dashboard </p> :
+                                    <p  onClick={()=>navigate('admin-login')}>My Account</p>
+                                 }
                                 </div>
                                   
                                 <div onClick={()=>navigate('history')} className='account_listing_link'>
@@ -188,7 +193,7 @@ const Header = () => {
                                     <p>History</p>
                                 </div>
                                 {
-                                    id ? <div className='account_listing_link'>
+                                    user?.id ? <div className='account_listing_link'>
                                     <p style={{
                                         color: "red",
                                         marginLeft: '20px'
