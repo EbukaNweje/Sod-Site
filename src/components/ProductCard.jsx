@@ -9,25 +9,17 @@ const ProductCard = ({ limit, categoryCard }) => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // const productsToDisplay = limit ? products.slice(0, limit) : products;
+  const [error, setError] = useState(null);
 
   const getAllProducts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(
-        "https://sod-back-end.vercel.app/api/allProduct"
-      );
-      console.log("prouductInfo", response.data.data );
-      
-
-      if (response.status === 200) {
-        setProducts(response.data.data || []);
-      } else {
-        console.error("Failed to fetch products");
-      }
+      setError(null);
+      const { data } = await axios.get("https://sod-back-end.vercel.app/api/allProduct");
+      setProducts(data?.data || []);
     } catch (error) {
       console.error("Error fetching products:", error);
+      setError("Failed to load products. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -41,10 +33,12 @@ const ProductCard = ({ limit, categoryCard }) => {
     <div className="product_card_body">
       {loading ? (
         <p>Loading products...</p>
+      ) : error ? (
+        <p style={{ color: "red" }}>{error}</p>
       ) : products.length === 0 ? (
         <p>No products available.</p>
       ) : (
-        products.map((e) => (
+        (limit ? products.slice(0, limit) : products).map((e) => (
           <div
             onClick={() => navigate(`/product/${e?._id}`)} 
             key={e?._id}
@@ -54,11 +48,14 @@ const ProductCard = ({ limit, categoryCard }) => {
               <IoCart />
             </div>
             <div className="product_card_image_container">
-              <img src={e.image} alt="image" />
+              <img src={e.image} alt={e.name || "Product"} loading="lazy" />
             </div>
             <div className="product_card_text_container">
               <h3>{e.name}</h3>
-              <p style={{display: "flex", alignItems: "center", gap: "2px", justifyContent: "center"}}><TbCurrencyNaira/>{e.price}K</p>
+              <p style={{display: "flex", alignItems: "center", gap: "2px", justifyContent: "center"}}>
+                <TbCurrencyNaira />
+                {Number(e.price).toLocaleString()}K
+              </p>
               <p style={{color: "#b22222", fontSize: "12px"}}>
                  {e?.quantity} {e?.quantity === 1 ? "piece" : "pieces"} in stock
               </p>

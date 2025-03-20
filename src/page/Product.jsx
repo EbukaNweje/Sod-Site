@@ -44,6 +44,7 @@ const Product = () => {
     };
 
     try {
+      console.log("this is thye cart item",cartItem)
       const response = await axios.post(
         "https://sod-back-end.vercel.app/api/addCart",
         cartItem
@@ -74,31 +75,39 @@ const Product = () => {
         </div>
 
         <div className="product_details_information_container">
-          <h1>{product.desc}</h1>
-          <h3>{product.amount}</h3>
+          <h1>{product.name}</h1>
+          <h1>{product.description}</h1>
+          <h3>{Number(product.price).toLocaleString()}K</h3>
 
-          <p>Sizes</p>
+          <p>Sizes Available : {product.size}</p>
           <select
             value={selectedSize}
             onChange={(e) => setSelectedSize(e.target.value)}
           >
             <option value="">Choose an option</option>
-            <option value="s">S</option>
-            <option value="m">M</option>
-            <option value="l">L</option>
-            <option value="xl">XL</option>
-            <option value="2xl">2XL</option>
-            <option value="3xl">3XL</option>
-            <option value="4xl">4XL</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+            <option value="2xL">2XL</option>
+            <option value="3xL">3XL</option>
+            <option value="4xL">4XL</option>
           </select>
 
           {selectedSize && (
-            <div className="availability_container">
-              <h4>
-                Availability: <span>1 in stock</span>
-              </h4>
-            </div>
-          )}
+  <div className="availability_container">
+    {product.size.includes(selectedSize) ? (
+      <h4>
+        Availability: <span style={{ color: "green" }}>In Stock</span>
+      </h4>
+    ) : (
+      <h4>
+        Availability: <span style={{ color: "red" }}>Out of Stock</span>
+      </h4>
+    )}
+  </div>
+)}
 
           <div className="product_details_quantity_button_container">
             <input
