@@ -52,9 +52,9 @@ const App = () => {
           <Route path='all-orders' element={<Order/>}/>
         </Route>
           </Route>
-          <Route element={<UserPrivateRoute />}>
-            {/* <Route path="/user-dashboard" element={<UserDashboard />} /> */}
-          </Route>
+          {/* <Route element={<UserPrivateRoute />}>
+            <Route path="/user-dashboard" element={<UserDashboard />} />
+          </Route> */}
         </Routes>
       </HashRouter>
     </>

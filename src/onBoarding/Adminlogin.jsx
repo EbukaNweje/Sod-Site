@@ -7,7 +7,7 @@ import { IoEyeOff } from "react-icons/io5";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import {useDispatch} from 'react-redux'
-import { UserId } from '../components/global/features';
+import { AdminToken } from '../components/global/features';
 
 const Adminlogin = () => {
     const dispatch = useDispatch()
@@ -82,7 +82,7 @@ const Adminlogin = () => {
         console.log("tok", res.data.token);
         
         toast.success(res.data.message)
-        dispatch(UserId(res?.data?.data?._id))
+        dispatch(AdminToken(res?.data?.token))
         navigate(`/adminpage`)
         console.log("res", res.data)
         // console.log(res)
@@ -112,7 +112,7 @@ const Adminlogin = () => {
                         <img src={sodlogo_white} alt='logo'/>
                     </div>
                     <h3>Welcome back Admin!</h3>
-                    <p>Log back into your Jumia account.</p>
+                    <p>Log back into your sodoriginal account.</p>
                 </div>
                 <div className='onboarding_item_inputs_container'>
                     <div className='onboarding_input'>

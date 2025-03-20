@@ -3,6 +3,7 @@ import axios from "axios";
 
 const initialState = {
     User : {},
+    adminToken : "",
     id : "",
     cart: [],
     isLoggedIn: false
@@ -27,6 +28,10 @@ const features = createSlice({
             state.User = {};
             state.id = "";
             state.isLoggedIn = false
+        },
+
+        AdminToken: (state, {payload})=>{
+            state.adminToken = payload
         }
 
     }
@@ -35,7 +40,7 @@ const features = createSlice({
 
 
 
-export const {UsersData, UserId, signOut} =
+export const {UsersData, UserId, signOut, AdminToken} =
     features.actions;
 
 export default features.reducer;

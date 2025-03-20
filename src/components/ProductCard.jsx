@@ -57,7 +57,7 @@ const ProductCard = ({ limit, categoryCard }) => {
               <img src={e.image} alt="image" />
             </div>
             <div className="product_card_text_container">
-              <h3>{e.description}</h3>
+              <h3>{e.name}</h3>
               <p style={{display: "flex", alignItems: "center", gap: "2px", justifyContent: "center"}}><TbCurrencyNaira/>{e.price}K</p>
               <p style={{color: "#b22222", fontSize: "12px"}}>
                  {e?.quantity} {e?.quantity === 1 ? "piece" : "pieces"} in stock
