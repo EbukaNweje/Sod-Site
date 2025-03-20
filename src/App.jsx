@@ -53,7 +53,7 @@ const App = () => {
         </Route>
           </Route>
           <Route element={<UserPrivateRoute />}>
-            <Route path="/user-dashboard" element={<UserDashboard />} />
+            {/* <Route path="/user-dashboard" element={<UserDashboard />} /> */}
           </Route>
         </Routes>
       </HashRouter>

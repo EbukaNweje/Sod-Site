@@ -152,11 +152,11 @@ const AddProduct = () => {
       formDatas.append("size", formData.size);
       formDatas.append("category", formData.category);
   
-      const config = {
-        headers: {
-          "content-type": "multipart/form-data"
-        }
-      }
+      // const config = {
+      //   headers: {
+      //     "content-type": "multipart/form-data"
+      //   }
+      // }
 
       console.log("formDatas", formDatas);
   

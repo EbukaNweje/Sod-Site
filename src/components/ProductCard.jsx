@@ -3,6 +3,7 @@ import { IoCart } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./componentCss/productCard.css";
+import { TbCurrencyNaira } from "react-icons/tb";
 
 const ProductCard = ({ limit, categoryCard }) => {
   const navigate = useNavigate();
@@ -57,9 +58,9 @@ const ProductCard = ({ limit, categoryCard }) => {
             </div>
             <div className="product_card_text_container">
               <h3>{e.description}</h3>
-              <p>{e.price}</p>
-              <p style={{color: "#b22222"}}>
-                Only {e?.quantity} remaining!
+              <p style={{display: "flex", alignItems: "center", gap: "2px", justifyContent: "center"}}><TbCurrencyNaira/>{e.price}K</p>
+              <p style={{color: "#b22222", fontSize: "12px"}}>
+                 {e?.quantity} {e?.quantity === 1 ? "piece" : "pieces"} in stock
               </p>
             </div>
           </div>

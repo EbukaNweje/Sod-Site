@@ -4,7 +4,7 @@ import "./pagesCss/product.css";
 import { useParams } from "react-router-dom";
 
 const Product = () => {
-  const { Id } = useParams();
+  const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState("");
@@ -15,7 +15,7 @@ const Product = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `https://sod-back-end.vercel.app/api/oneProduct/${Id}`
+          `https://sod-back-end.vercel.app/api/oneProduct/${id}`
         );
 
         if (response.status === 200) {
@@ -27,7 +27,7 @@ const Product = () => {
     };
 
     fetchProduct();
-  }, [Id]);
+  }, [id]);
 
   const addToCart = async () => {
     if (!selectedSize) {

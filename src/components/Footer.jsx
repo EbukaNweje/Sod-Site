@@ -69,11 +69,11 @@ const Footer = () => {
               <a href=''>Message us via whatsapp,</a>
               <a href=''>https://wa.me/message/CL4Z4FLG3LMTO1</a>
               <a href=''>+2348123947939</a>
-              <a href=''>12@isb.ng</a>
+              <a href=''>@sodoriginal.ng</a>
             </div>
           </div>
           <div className='footer_bottom_end'>
-            <p>© 2024 Sod Orginal. Powered by Sod Orginal</p>
+            <p>© 2025 Sod Orginal. Powered by Sod Orginal</p>
             <span>
               <LiaCcVisa/>
               <LiaCcMastercard/>
