@@ -58,7 +58,7 @@ const Order = () => {
             <th>Status</th>
           </tr>
         </thead>
-        <tbody>
+        {/* <tbody>
         {order.length > 0 ? (
             order.map((order) => (
               <tr key={order._id}>
@@ -83,7 +83,7 @@ const Order = () => {
               <td colSpan="5">No orders found</td>
             </tr>
           )}
-        </tbody>
+        </tbody> */}
       </table>
     </div>
   );

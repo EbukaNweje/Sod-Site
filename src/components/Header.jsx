@@ -24,7 +24,7 @@ import { MdPayment } from "react-icons/md";
 const Header = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const user = useSelector((state) => state);
+    const user = useSelector((state) => state?.id);
 
     console.log("this is id", {user})
 
@@ -56,30 +56,23 @@ const Header = () => {
         }
     }, [changeScale])
 
-
     const logOut = () => {
         dispatch(signOut())
         navigate("/")
     }
 
-
     const [userdata, setUserdata] = useState()
     const url = `https://sod-back-end.vercel.app/api/`;
 
-    // console.log()
-
     const getUserInfo = useCallback(async () => {
-        if (!user?.id) return; // ✅ Prevent unnecessary API calls
+        if (!user) return; 
         try {
-            const res = await axios.get(`${`${url}oneuserdata/${user?.id}`}`);
+            const res = await axios.get(`${`${url}oneuserdata/${user}`}`);
             setUserdata(res?.data?.data);
-            // console.log(res);
         } catch (error) {
             console.log(error);
         }
-    }, [user?.id]); // ✅ Depend only on `id`
-
-    //  console.log("this is userdata", userdata)
+    }, [user]); 
 
     const [category, setCategory] = useState()
 
@@ -88,7 +81,6 @@ const Header = () => {
             
             const res = await axios.get(`${`${url}getallcartegory`}`)
             setCategory(res.data.data)
-            // console.log(res)
 
         }catch(err) {
             console.log(err)
@@ -98,10 +90,10 @@ const Header = () => {
 
     useEffect(() => {
         getAllCategory()
-            if (user.id) {
+            // if (user.id) {
                 getUserInfo();
-            }
-    }, [user.id]); 
+            // }
+    }, []); 
 
    
 
@@ -164,11 +156,11 @@ const Header = () => {
 
                             <div className='account_listing_container'>
                                 {
-                                    user?.id ?  null : <div className='header_signin_btn'><button onClick={()=>navigate("/login")}>Sign In</button></div>
+                                    user ?  null : <div className='header_signin_btn'><button onClick={()=>navigate("/login")}>Sign In</button></div>
                                 }
                                
                                {
-                                user?.id ?   <div className='account_listing_link'>
+                                user ?   <div className='account_listing_link'>
                                 {/* <FaRegUser size={16}/> */}
                                 <p 
                                 style={{
@@ -180,20 +172,23 @@ const Header = () => {
                                {
 
                                }
-                                <div className='account_listing_link'>
-                                    <FaRegUser size={16}/>
-                                 {
-                                    user?.isLoggedIn ? <p onClick={()=> navigate(`/adminpage`)}> Back to dashboard </p> :
-                                    <p  onClick={()=>navigate('admin-login')}>My Account</p>
-                                 }
-                                </div>
+                             {
+                                user?    <div className='account_listing_link'>
+                                <FaRegUser size={16}/>
+                                <p  onClick={()=>navigate('admin-login')}>My Account</p>
+                             {/* {
+                                user?.isLoggedIn ? <p onClick={()=> navigate(`/adminpage`)}> Back to dashboard </p> :
+                                <p  onClick={()=>navigate('admin-login')}>My Account</p>
+                             } */}
+                            </div>: null
+                             }
                                   
                                 <div onClick={()=>navigate('history')} className='account_listing_link'>
                                     <BsShopWindow size={16}/>
                                     <p>History</p>
                                 </div>
                                 {
-                                    user?.id ? <div className='account_listing_link'>
+                                    user ? <div className='account_listing_link'>
                                     <p style={{
                                         color: "red",
                                         marginLeft: '20px'

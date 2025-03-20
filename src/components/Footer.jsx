@@ -65,9 +65,9 @@ const Footer = () => {
               <a href = {`/product-category/Caps`}>Caps</a>
             </div>
             <div className='footer_links_container'>
-              <h2>Locate Us</h2>
-              <a href=''>Sod Orginals Store B11, Capital Mall,</a>
-              <a href=''>Orchid Road Lekki Lagos, Nigeria.</a>
+              <h2>Message Us</h2>
+              <a href=''>Message us via whatsapp,</a>
+              <a href=''>https://wa.me/message/CL4Z4FLG3LMTO1</a>
               <a href=''>+2348123947939</a>
               <a href=''>12@isb.ng</a>
             </div>

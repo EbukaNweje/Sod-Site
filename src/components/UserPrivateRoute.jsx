@@ -2,14 +2,15 @@ import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const PrivateRoute = () => {
+const UserPrivateRoute = () => {
   const user = useSelector((state) => state?.id);
-  
+
+  // Redirect to login if not authenticated
   if (!user?.id) {
-    return <Navigate to="/admin-login" />;
+    return <Navigate to="/login" />;
   }
 
   return <Outlet />;
 };
 
-export default PrivateRoute;
+export default UserPrivateRoute;

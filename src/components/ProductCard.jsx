@@ -56,8 +56,11 @@ const ProductCard = ({ limit, categoryCard }) => {
               <img src={e.image} alt="image" />
             </div>
             <div className="product_card_text_container">
-              <h3>{e.desc}</h3>
-              <p>{e.amount}</p>
+              <h3>{e.description}</h3>
+              <p>{e.price}</p>
+              <p style={{color: "#b22222"}}>
+                Only {e?.quantity} remaining!
+              </p>
             </div>
           </div>
         ))

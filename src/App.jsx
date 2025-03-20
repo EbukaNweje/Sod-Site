@@ -20,6 +20,7 @@ import AddProduct from './page/Admin/AddProduct'
 import Allproduct from './page/Admin/Allproduct'
 import Order from './page/Admin/Order'
 import PrivateRoute from './components/PrivateRoute'
+import UserPrivateRoute from './components/UserPrivateRoute'
 
 
 const App = () => {
@@ -41,14 +42,18 @@ const App = () => {
             <Route path='/cart' element={<Cart/>}/>
             <Route path='/history' element={<History/>}/>
             <Route path='/checkout' element={<Checkout/>}/>
+            
           </Route>
-        {/* <Route element={<PrivateRoute/>}> */}
+        <Route element={<PrivateRoute/>}>
         <Route path='/adminpage' element={<Adminland />}>
           <Route index element={<Adminpage />} />
           <Route path='add-product' element={<AddProduct/>} />
           <Route path='all-products' element={<Allproduct/>}/>
           <Route path='all-orders' element={<Order/>}/>
-        {/* </Route> */}
+        </Route>
+          </Route>
+          <Route element={<UserPrivateRoute />}>
+            <Route path="/user-dashboard" element={<UserDashboard />} />
           </Route>
         </Routes>
       </HashRouter>
