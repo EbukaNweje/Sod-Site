@@ -24,14 +24,16 @@ import { MdPayment } from "react-icons/md";
 const Header = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const user = useSelector((state) => state?.id);
+    const id = useSelector((state) => state?.id);
+    const userData = useSelector((state) => state?.User);
 
-    console.log("this is id", {user})
+    // console.log("this is id", {user})
 
     const [drop, setDrop] = useState(false)
     const [search, setSearch] = useState(false)
     const [changeScale, setChangeScale] = useState(false)
     const [showAccountListing, setShowAccountListing] = useState(false)
+    const [cart, setCart] = useState()
 
     const ShowDrop = () => {
         setDrop(!drop)
@@ -40,6 +42,27 @@ const Header = () => {
         setSearch(!search)
     } 
 
+    const cartUrl = "https://sod-back-end.vercel.app/api/getCart"
+
+    const getuserCartitem = ()=>{
+        axios.get(cartUrl,{
+            headers: {
+                Authorization: `header ${userData.token}`
+            }
+        })
+        .then(res => {
+            // console.log(res)
+            setCart(res?.data?.cart)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        
+    }
+
+    useEffect(()=>{
+        getuserCartitem()
+    },[cart])
    
     useEffect(()=>{
         const interval = setTimeout(() => {
@@ -65,14 +88,14 @@ const Header = () => {
     const url = `https://sod-back-end.vercel.app/api/`;
 
     const getUserInfo = useCallback(async () => {
-        if (!user) return; 
+        if (!id) return; 
         try {
-            const res = await axios.get(`${`${url}oneuserdata/${user}`}`);
+            const res = await axios.get(`${`${url}oneuserdata/${id}`}`);
             setUserdata(res?.data?.data);
         } catch (error) {
             console.log(error);
         }
-    }, [user]); 
+    }, [id]); 
 
     const [category, setCategory] = useState()
 
@@ -135,18 +158,20 @@ const Header = () => {
             <div className='SodLogo' style={{
                 transform: changeScale ? "scale(1)" : "scale(1.2)",
                 transition: 'transform 0.2s ease-in-out'
-            }} onClick={()=> navigate("/")}>
-                <img src={SodLogo} alt="Sod Orginal" />
+            }}>
+                <img src={SodLogo} alt="Sod Orginal" onClick={()=> navigate(`${id ? `/${userdata.username}` : "/"}`)}/>
             </div>
             <div className='cartContainer'>
                 <div className='AmountContainer'>
-                    <div className='Naira'>{user?.id ? userdata?.balance : "0.00"}<TbCurrencyNaira/></div>
-                    <div className='dollar'>{user?.id ? userdata?.balance : "0.00"}<FaDollarSign/></div>
+                    <div className='Naira'>{id ? userdata?.balance : "0.00"}<TbCurrencyNaira/></div>
+                    <div className='dollar'>{id ? userdata?.balance : "0.00"}<FaDollarSign/></div>
                 </div>
 
                 <div className='CartBag' onClick={()=> navigate("/cart")}>
                     <IoCart className='myCartIcon'/>
-                    <div className='CartBagNum'>0</div>
+                    <div className='CartBagNum'>
+                        {id ? cart?.length : "0"}
+                    </div>
                 </div>
 
                 <div className='UserIcon'>
@@ -156,11 +181,11 @@ const Header = () => {
 
                             <div className='account_listing_container'>
                                 {
-                                    user ?  null : <div className='header_signin_btn'><button onClick={()=>navigate("/login")}>Sign In</button></div>
+                                    id ?  null : <div className='header_signin_btn'><button onClick={()=>navigate("/login")}>Sign In</button></div>
                                 }
                                
                                {
-                                user ?   <div className='account_listing_link'>
+                                id ?   <div className='account_listing_link'>
                                 {/* <FaRegUser size={16}/> */}
                                 <p 
                                 style={{
@@ -173,11 +198,11 @@ const Header = () => {
 
                                }
                              {
-                                user?    <div className='account_listing_link'>
+                                id?    <div className='account_listing_link'>
                                 <FaRegUser size={16}/>
                                 <p  onClick={()=>navigate('admin-login')}>My Account</p>
                              {/* {
-                                user?.isLoggedIn ? <p onClick={()=> navigate(`/adminpage`)}> Back to dashboard </p> :
+                                id?.isLoggedIn ? <p onClick={()=> navigate(`/adminpage`)}> Back to dashboard </p> :
                                 <p  onClick={()=>navigate('admin-login')}>My Account</p>
                              } */}
                             </div>: null
@@ -188,7 +213,7 @@ const Header = () => {
                                     <p>History</p>
                                 </div>
                                 {
-                                    user ? <div className='account_listing_link'>
+                                    id ? <div className='account_listing_link'>
                                     <p style={{
                                         color: "red",
                                         marginLeft: '20px'

@@ -7,7 +7,7 @@ import { IoEyeOff } from "react-icons/io5";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import {useDispatch} from 'react-redux'
-import { UserId } from '../components/global/features';
+import { UserId, UsersData } from '../components/global/features';
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -78,11 +78,13 @@ const Login = () => {
         // console.log(values)
       try{
         const res = await axios.post(url, values)
-        localStorage.setItem("authToken", res?.data?.token);
-        console.log("tok", res.data.token);
+        // localStorage.setItem("authToken", res?.data?.token);
+        // console.log("tok", res.data.token);
         
         toast.success(res.data.message)
+        dispatch(UsersData(res?.data))
         dispatch(UserId(res?.data?.data?._id))
+
         navigate(`/${res?.data?.data?.username}`)
         // console.log(res)
   

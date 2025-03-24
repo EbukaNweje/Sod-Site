@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./pagesCss/product.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Product = () => {
   const { id } = useParams();
@@ -10,6 +11,11 @@ const Product = () => {
   const [selectedSize, setSelectedSize] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const  userId = useSelector((state) => state?.id);
+  const userData = useSelector((state) => state?.User);
+  const navigate = useNavigate();
+  console.log(userId)
+  console.log(userData)
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -29,7 +35,13 @@ const Product = () => {
     fetchProduct();
   }, [id]);
 
+  console.log(selectedSize)
+
   const addToCart = async () => {
+    if(!userId){
+      return navigate("/login")
+    }
+
     if (!selectedSize) {
       setMessage("Please select a size before adding to cart.");
       return;
@@ -41,14 +53,23 @@ const Product = () => {
     const cartItem = {
       productId: product?._id,
       quantity: quantity,
+      size: selectedSize,
     };
 
+    const Token =  userData.token
+
     try {
-      console.log("this is thye cart item",cartItem)
+
+      console.log("this is the cart item",cartItem)
       const response = await axios.post(
         "https://sod-back-end.vercel.app/api/addCart",
-        cartItem
+        cartItem, {
+          headers: {
+            "Authorization": `header ${Token}`,
+          }
+        }
       );
+
       setMessage("Product added to cart successfully!");
       console.log(response);
     } catch (error) {
@@ -88,7 +109,7 @@ const Product = () => {
             <option value="S">S</option>
             <option value="M">M</option>
             <option value="L">L</option>
-            <option value="XL">XL</option>
+            <option value="xL">XL</option>
             <option value="XXL">XXL</option>
             <option value="2xL">2XL</option>
             <option value="3xL">3XL</option>
@@ -97,7 +118,7 @@ const Product = () => {
 
           {selectedSize && (
   <div className="availability_container">
-    {product.size.includes(selectedSize) ? (
+    {product.size.includes(selectedSize.toUpperCase()) ? (
       <h4>
         Availability: <span style={{ color: "green" }}>In Stock</span>
       </h4>

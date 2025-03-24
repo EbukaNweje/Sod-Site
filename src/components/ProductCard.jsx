@@ -17,6 +17,7 @@ const ProductCard = ({ limit, categoryCard }) => {
       setError(null);
       const { data } = await axios.get("https://sod-back-end.vercel.app/api/allProduct");
       setProducts(data?.data || []);
+      console.log(data?.data )
     } catch (error) {
       console.error("Error fetching products:", error);
       setError("Failed to load products. Please try again later.");
