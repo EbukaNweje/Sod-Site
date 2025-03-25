@@ -31,11 +31,16 @@ const features = createSlice({
             state.isLoggedIn = true
             state.id = payload;
         },
+        AdminId: (state, {payload})=>{
+            state.isLoggedIn = true
+            state.adminToken = payload;
+        },
 
         signOut: (state, {payload})=>{
             state.User = {};
             state.id = "";
-            state.isLoggedIn = false
+            state.isLoggedIn = false;
+            state.adminToken  = ""
         },
 
         AdminToken: (state, {payload})=>{
@@ -48,7 +53,7 @@ const features = createSlice({
 
 
 
-export const {UsersData, UserId, signOut, AdminToken, GetCart, RemoveCart} =
+export const {UsersData, UserId, AdminId, signOut, AdminToken, GetCart, RemoveCart} =
     features.actions;
 
 export default features.reducer;
