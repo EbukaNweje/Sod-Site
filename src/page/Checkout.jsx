@@ -16,9 +16,9 @@ const Checkout = () => {
     const navigate = useNavigate()
     const user = useSelector((state) => state?.User);
     const getCart = useSelector((state) => state?.cart);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(true);
-    const [orderId, setOrderId] = useState("")
+    const [orderId, setOrderId] = useState("");
 
     console.log("cart",getCart)
     const [order, setOrder] = useState({
@@ -69,6 +69,7 @@ const Checkout = () => {
             alert("All fields are required")
             return
         }
+
         const url = "https://sod-back-end.vercel.app/api/placeOrder"
          e.preventDefault()
          setLoading(true)
@@ -80,6 +81,8 @@ const Checkout = () => {
         })
         setOrderId(res?.data?.order?._id)
         setIsModalOpen(true);
+        setLoading(false)
+        navigate(`/${userdata.username}`)
         console.log(res)
 
       } catch (error) {
