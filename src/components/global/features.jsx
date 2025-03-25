@@ -19,6 +19,14 @@ const features = createSlice({
             state.User = payload
         },
 
+        GetCart: (state, {payload})=>{
+            state.cart = payload
+        },
+
+        RemoveCart: (state, {payload})=>{
+            state.cart = []
+        },
+
         UserId: (state, {payload})=>{
             state.isLoggedIn = true
             state.id = payload;
@@ -40,7 +48,7 @@ const features = createSlice({
 
 
 
-export const {UsersData, UserId, signOut, AdminToken} =
+export const {UsersData, UserId, signOut, AdminToken, GetCart, RemoveCart} =
     features.actions;
 
 export default features.reducer;

@@ -128,3 +128,25 @@
     font-family: "Roboto", sans-serif;
     font-weight: 500;
 }
+
+
+.Payment_method {
+    width: 100%;
+    padding: 12px 8px;
+    border-bottom: 1px solid rgba(211, 211, 211, 0.687);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.check {
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+

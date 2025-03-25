@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react'
 import './pagesCss/cart.css'
-import sod_orginal_snake_design_logo_pair_t_shirt_and_shorts from '../assets/sod_orginal_snake_design_logo_pair_t_shirt_and_shorts.png';
+// import sod_orginal_snake_design_logo_pair_t_shirt_and_shorts from '../assets/sod_orginal_snake_design_logo_pair_t_shirt_and_shorts.png';
 import { MdOutlineDeleteOutline } from "react-icons/md";
-import { FiMinus } from "react-icons/fi";
-import { MdAdd } from "react-icons/md";
+// import { FiMinus } from "react-icons/fi";
+// import { MdAdd } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { GetCart } from '../components/global/features';
+import { useDispatch } from 'react-redux';
 
 const Cart = () => {
-
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const userData = useSelector((state) => state?.User);
     const id = useSelector((state) => state?.id);
@@ -23,6 +25,7 @@ const Cart = () => {
         })
         .then(res => {
             // console.log(res)
+            dispatch(GetCart(res.data))
             setCart(res.data.cart);
             setSubtotal(res.data.subtotal); // Store subtotal
         })
