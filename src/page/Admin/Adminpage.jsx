@@ -45,7 +45,6 @@ const AdminPage = () => {
       </div>
       </div>
       
-
       <div className="admin-details">
         <h3>Account Information</h3>
         <p><strong>Email:</strong> {admin?.email}</p>

@@ -57,7 +57,10 @@
     color: green;
   }
   
-  @media (max-width: 768px) {
+  @media(min-width: 320px) and (max-width: 768px) {
+    .orderContainer{
+      padding: 20px;
+    }
     .orderTable th, .orderTable td {
       font-size: 14px;
       padding: 10px;

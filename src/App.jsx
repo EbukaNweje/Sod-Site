@@ -21,6 +21,7 @@ import Allproduct from './page/Admin/Allproduct'
 import Order from './page/Admin/Order'
 import PrivateRoute from './components/PrivateRoute'
 import UserPrivateRoute from './components/UserPrivateRoute'
+import User from './page/User'
 
 
 const App = () => {
@@ -52,9 +53,10 @@ const App = () => {
           <Route path='all-orders' element={<Order/>}/>
         </Route>
           </Route>
-          {/* <Route element={<UserPrivateRoute />}>
-            <Route path="/user-dashboard" element={<UserDashboard />} />
-          </Route> */}
+          <Route element={<UserPrivateRoute />}>
+        <Route path="/user-dashboard/:fullName" element={<User />} />
+      </Route>
+
         </Routes>
       </HashRouter>
     </>

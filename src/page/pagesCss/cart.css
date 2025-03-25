@@ -203,3 +203,20 @@
     font-family: "Roboto", sans-serif;
     font-weight: 500;
 }
+
+@media (min-width: 320px) and (max-width: 768px) {
+
+    .cart_page_main_body{
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .cart_item_container{
+        width: 100%;
+    }
+
+    .cart_message_area{
+        width: 100%;
+    }
+
+}

@@ -26,12 +26,13 @@ const Header = () => {
     const navigate = useNavigate()
     const id = useSelector((state) => state?.id);
     const userData = useSelector((state) => state?.User);
+    const adminToken = useSelector((state)=> state?.adminToken)
 
-    // console.log("this is id", {user})
+    // console.log("this is id", {adminToken})
 
-    const [drop, setDrop] = useState(false)
-    const [search, setSearch] = useState(false)
-    const [changeScale, setChangeScale] = useState(false)
+    const [drop, setDrop] = useState(false);
+    const [search, setSearch] = useState(false);
+    const [showMenu, setShowMenu] = useState(false);    const [changeScale, setChangeScale] = useState(false)
     const [showAccountListing, setShowAccountListing] = useState(false)
     const [cart, setCart] = useState()
 
@@ -41,6 +42,7 @@ const Header = () => {
     const ShowSearchInput = () => {
         setSearch(!search)
     } 
+    const toggleMenu = () => setShowMenu(!showMenu);
 
     const cartUrl = "https://sod-back-end.vercel.app/api/getCart"
 
@@ -125,7 +127,7 @@ const Header = () => {
         <TopHeader/>
         <article className='HeaderWrapper'>
             <div className='NavsContainer'>
-                <div className='MobileToggle'><IoMenu/></div>
+            <div className='MobileToggle' onClick={toggleMenu}><IoMenu /></div>
 
                 <div className='Search' onClick={ShowSearchInput}><IoSearch/></div>
                {
@@ -183,6 +185,9 @@ const Header = () => {
                                 {
                                     id ?  null : <div className='header_signin_btn'><button onClick={()=>navigate("/login")}>Sign In</button></div>
                                 }
+                                {
+                                    adminToken !== "" ?  null : <div className='header_signin_btn'><button onClick={()=>navigate("/admin-login")}>Login as Admin</button></div>
+                                }
                                
                                {
                                 id ?   <div className='account_listing_link'>
@@ -198,9 +203,9 @@ const Header = () => {
 
                                }
                              {
-                                id?    <div className='account_listing_link'>
+                                id && adminToken == ""?    <div className='account_listing_link'>
                                 <FaRegUser size={16}/>
-                                <p  onClick={()=>navigate('admin-login')}>My Account</p>
+                                <p  onClick={()=>navigate('user-dashboard/fullName')}>My Account</p>
                              {/* {
                                 id?.isLoggedIn ? <p onClick={()=> navigate(`/adminpage`)}> Back to dashboard </p> :
                                 <p  onClick={()=>navigate('admin-login')}>My Account</p>
@@ -236,6 +241,16 @@ const Header = () => {
                 />
             </div>
         </div>
+        {showMenu && (
+                <div className='mobile_menu animate__animated animate__fadeInDown'>
+                    <ul>
+                        <li onClick={toggleMenu}>Shop By Category</li>
+                        <li onClick={() => navigate("/new-arrivals")}>New Arrivals</li>
+                        <li>Collections</li>
+                    </ul>
+                </div>
+            )}
+
     </main>
   )
 }

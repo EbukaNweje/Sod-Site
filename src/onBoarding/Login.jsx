@@ -77,6 +77,7 @@ const Login = () => {
       setLoading(true)
         // console.log(values)
       try{
+        setLoading(false)
         const res = await axios.post(url, values)
         // localStorage.setItem("authToken", res?.data?.token);
         // console.log("tok", res.data.token);
@@ -85,9 +86,9 @@ const Login = () => {
         dispatch(UsersData(res?.data))
         dispatch(UserId(res?.data?.data?._id))
 
-        navigate(`/${res?.data?.data?.username}`)
-        // console.log(res)
-  
+        navigate(`/user-dashboard/${res?.data?.data?.fullName}`)
+        console.log(res?.data?.data)
+        // ${res?.data?.data?.username}
       }catch(error){
         console.log(error)
         setLoading(false)
