@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 import { RemoveCart } from '../components/global/features'
 import { useDispatch } from 'react-redux';
 import { CopyOutlined } from "@ant-design/icons";
+import {ToastContainer} from 'react-toastify'
+
 
 const Checkout = () => {
     const dispatch = useDispatch()
@@ -15,7 +17,7 @@ const Checkout = () => {
     const user = useSelector((state) => state?.User);
     const getCart = useSelector((state) => state?.cart);
     const [loading, setLoading] = useState(false)
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(true);
     const [orderId, setOrderId] = useState("")
 
     console.log("cart",getCart)
@@ -56,6 +58,7 @@ const Checkout = () => {
     const handleOk = () => {
         setIsModalOpen(false);
         toast.success("Order Placed Successfully")
+        dispatch(RemoveCart())
       };
       const handleCancel = () => {
         setIsModalOpen(false);
@@ -69,7 +72,6 @@ const Checkout = () => {
         const url = "https://sod-back-end.vercel.app/api/placeOrder"
          e.preventDefault()
          setLoading(true)
-        dispatch(RemoveCart())
       try {
         const res = await axios.post(url, order,{
             headers: {
@@ -91,6 +93,8 @@ const Checkout = () => {
 
   return (
     <>
+    <ToastContainer />
+
         <main className='checkout_main_body'>
             <article className='checkout_delivery_details'>
                 <section className='delivery_details_top'>
