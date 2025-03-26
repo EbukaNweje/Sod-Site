@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./Admin/AdminCss/Adminland.css";
 
 const UserEdit = () => {
+    const [loading, setLoading]= useState(false)
   const user = useSelector((state) => state?.user);
   const navigate = useNavigate();
 
@@ -22,7 +23,7 @@ const UserEdit = () => {
     e.preventDefault();
     try {
       const res = await axios.put(
-        `https://sod-back-end.vercel.app/api/updateUser/${user?.data?.id}`,
+        `https://sod-back-end.vercel.app/api/updateoneUser/${user?.data?.id}`,
         formData
       );
       console.log(res.data);
