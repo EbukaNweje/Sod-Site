@@ -6,15 +6,15 @@ import { useNavigate } from "react-router-dom";
   
 const Useracct = () => {
   const [admin, setAdmin] = useState(null)
-  const id = useSelector((state)=> state.id)
-//   console.log("userAcct id", id)
+  const userId = useSelector((state)=> state.id)
+  console.log("userAcct id", userId)
 const nav = useNavigate()
 
   const getOne = async() =>{
     try{
-      const res = await axios.get(`https://sod-back-end.vercel.app/api/getOneUser/${id} `)
-      console.log(res)
-      setAdmin(res?.data)
+      const res = await axios.get(`https://sod-back-end.vercel.app/api/oneuserdata/${userId} `)
+      console.log(res.data.data)
+      setAdmin(res?.data?.data)
     }
     catch (error){
       console.error('Error fetching user data:', error);
@@ -22,8 +22,8 @@ const nav = useNavigate()
   }
 
   useEffect(() => {
-   if (id) getOne();
-  }, [id])
+   if (userId) getOne();
+  }, [userId])
   
 
   return (
@@ -31,17 +31,18 @@ const nav = useNavigate()
         
       <div className="admin-profile">
       <div className="admin-info">
-      <h2>User</h2>
-      <p>Username</p>
+      <h2>{admin?.fullName}</h2>
+      <p>{admin?.username}</p>
       </div>
       </div>
       
       <div className="admin-details">
         <h3>Account Information</h3>
-        <p><strong>Email:</strong> </p>
-        <p><strong>Username:</strong> </p>
-        <p><strong>Wallet balance:</strong> </p>
-        <p><strong>Last Login:</strong> </p>
+        <p><strong>Email:</strong>{admin?.email} </p>
+        <p><strong>Username:</strong>{admin?.username} </p>
+        <p><strong>Wallet balance:</strong>{admin?.balance} </p>
+        <p><strong>Account created At:</strong> {admin?.createdAt} </p>
+        <p><strong>Account last updated At:</strong> {admin?.updatedAt} </p>
       </div>
       <div className="admin-actions">
         <button className="settings-btn" onClick={()=> nav('edit-profile')} >Edit Profile</button>
