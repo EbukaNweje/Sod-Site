@@ -183,14 +183,14 @@ const Header = () => {
 
                             <div className='account_listing_container'>
                                 {
-                                    id && adminToken == ""?  null : <div className='header_signin_btn'><button onClick={()=>navigate("/login")}>Sign In</button></div>
+                                    id ?  null : <div className='header_signin_btn'><button onClick={()=>navigate("/login")}>Sign In</button></div>
                                 }
-                                {
+                                {/* {
                                     adminToken !== "" ?  null : <div className='header_signin_btn'><button onClick={()=>navigate("/admin-login")}>Login as Admin</button></div>
-                                }
+                                } */}
                                
                                {
-                                id &&  adminToken == ""?   <div className='account_listing_link'>
+                                id ?   <div className='account_listing_link'>
                                 {/* <FaRegUser size={16}/> */}
                                 <p 
                                 style={{
@@ -203,18 +203,18 @@ const Header = () => {
 
                                }
                              {
-                                id && adminToken === ""?    <div className='account_listing_link'>
+                                id ?    <div className='account_listing_link'>
                                 <FaRegUser size={16}/>
                                 <p  onClick={()=>navigate('user-dashboard/fullName')}>My Account</p>
         
                             </div>: null
                              }
 
-                             {
+                             {/* {
                                 adminToken !== "" ?  <div className='account_listing_link'>
                                      <FaRegUser size={16}/> <p onClick={()=> navigate(`/adminpage`)}> Back to dashboard </p> 
                                 </div>: null
-                             }
+                             } */}
                                   
                                 <div onClick={()=>navigate('history')} className='account_listing_link'>
                                     <BsShopWindow size={16}/>

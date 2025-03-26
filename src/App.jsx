@@ -22,6 +22,7 @@ import Order from './page/Admin/Order'
 import PrivateRoute from './components/PrivateRoute'
 import UserPrivateRoute from './components/UserPrivateRoute'
 import User from './page/User'
+import Useracct from './page/Useracct'
 
 
 const App = () => {
@@ -55,7 +56,8 @@ const App = () => {
           </Route>
           <Route element={<UserPrivateRoute />}>
         <Route path="/user-dashboard/:fullName" element={<User />} />
-      </Route>
+        <Route index element={<Useracct />} />
+              </Route>
 
         </Routes>
       </HashRouter>
