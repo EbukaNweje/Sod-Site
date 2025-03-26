@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./AdminCss/Adminland.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AdminPage = () => {
   const [admin, setAdmin] = useState(null)
   const id = useSelector((state)=> state.id)
-  console.log(id)
+  // console.log(id)
+  const nav = useNavigate()
 
   const getOne = async() =>{
     try{
@@ -63,7 +65,7 @@ const AdminPage = () => {
       </div>
 
       <div className="admin-actions">
-        <button className="settings-btn">Edit Profile</button>
+        <button className="settings-btn" onClick={()=>nav('Admin-edit')}>Edit Profile</button>
       </div>
     </div>
   );

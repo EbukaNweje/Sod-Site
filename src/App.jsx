@@ -25,6 +25,7 @@ import User from './page/User'
 import Useracct from './page/Useracct'
 import UserEdit from './page/UserEdit'
 import FundWallet from './page/FundWallet'
+import AdminEdit from './page/Admin/AdminEdit'
 
 
 const App = () => {
@@ -51,6 +52,7 @@ const App = () => {
         <Route element={<PrivateRoute/>}>
         <Route path='/adminpage' element={<Adminland />}>
           <Route index element={<Adminpage />} />
+          <Route path="Admin-edit" element={<AdminEdit />} />  
           <Route path='add-product' element={<AddProduct/>} />
           <Route path='all-products' element={<Allproduct/>}/>
           <Route path='all-orders' element={<Order/>}/>
