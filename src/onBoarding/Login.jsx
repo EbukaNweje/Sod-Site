@@ -86,7 +86,8 @@ const Login = () => {
         dispatch(UsersData(res?.data))
         dispatch(UserId(res?.data?.data?._id))
 
-        navigate(`/user-dashboard`)
+        // navigate(`/user-dashboard`)
+        navigate(`/${res?.data?.data?.username}`)
         console.log(res?.data?.data)
         // ${res?.data?.data?.username}
       }catch(error){
