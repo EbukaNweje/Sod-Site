@@ -7,12 +7,12 @@ import { useNavigate } from "react-router-dom";
 const Useracct = () => {
   const [admin, setAdmin] = useState(null)
   const id = useSelector((state)=> state.id)
-  console.log("userAcct id", id)
+//   console.log("userAcct id", id)
 const nav = useNavigate()
 
   const getOne = async() =>{
     try{
-      const res = await axios.get(`https://sod-back-end.vercel.app/api/admindata/${id} `)
+      const res = await axios.get(`https://sod-back-end.vercel.app/api/getOneUser/${id} `)
       console.log(res)
       setAdmin(res?.data)
     }
@@ -31,20 +31,20 @@ const nav = useNavigate()
         
       <div className="admin-profile">
       <div className="admin-info">
-      <h2>{admin?.fullName}</h2>
-      <p>{admin?.username}</p>
+      <h2>User</h2>
+      <p>Username</p>
       </div>
       </div>
       
       <div className="admin-details">
         <h3>Account Information</h3>
-        <p><strong>Email:</strong> {admin?.email}</p>
-        <p><strong>Username:</strong> {admin?.username}</p>
-        <p><strong>Wallet balance:</strong> {admin?.username}</p>
-        <p><strong>Last Login:</strong> {admin?.lastLogin}</p>
+        <p><strong>Email:</strong> </p>
+        <p><strong>Username:</strong> </p>
+        <p><strong>Wallet balance:</strong> </p>
+        <p><strong>Last Login:</strong> </p>
       </div>
       <div className="admin-actions">
-        <button className="settings-btn" onClick={()=> nav('')} >Edit Profile</button>
+        <button className="settings-btn" onClick={()=> nav('edit-profile')} >Edit Profile</button>
       </div>
     </div>
   );

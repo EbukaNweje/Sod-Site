@@ -1,4 +1,4 @@
-.Adminland, .Userland{
+.Adminland{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -206,12 +206,55 @@
     color: #a4a4a4;
     font-size: 26px;
 }
+
+.Edit{
+  width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 22px 40px;
+}
+
+.edit-form, .wallet-form{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.edit-form input, .wallet-form input{
+  height: 40px;
+}
+
+.edit-form button, .wallet-form button{
+  height: 40px;
+  width: max-content;
+  padding: 20px;
+  color: white;
+  background-color: black;
+  font-weight: 500;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
   
 
 @media (min-width: 320px) and (max-width: 768px) {
 
-.Sidebar, .AdminPage{
+.Sidebar, .AdminPage, .Edit{
   padding: 20px;
+}
+
+.edit-form, .wallet-form{
+  width: 100%;
 }
 
 .nav-links{

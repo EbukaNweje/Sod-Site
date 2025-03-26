@@ -7,7 +7,7 @@ import { Outlet } from "react-router-dom";
 import { LiaCcApplePay, LiaCcDiscover, LiaCcMastercard, LiaCcVisa } from "react-icons/lia";
 
 const User = () => {
-  const user = useSelector((state) => state?.id);
+  // const user = useSelector((state) => state?.id);
 
   return (
     <div className='Adminland'>

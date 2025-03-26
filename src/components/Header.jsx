@@ -205,7 +205,7 @@ const Header = () => {
                              {
                                 id ?    <div className='account_listing_link'>
                                 <FaRegUser size={16}/>
-                                <p  onClick={()=>navigate('user-dashboard/fullName')}>My Account</p>
+                                <p  onClick={()=>navigate('/user-dashboard')}>My Account</p>
         
                             </div>: null
                              }

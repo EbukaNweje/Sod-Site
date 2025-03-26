@@ -23,6 +23,8 @@ import PrivateRoute from './components/PrivateRoute'
 import UserPrivateRoute from './components/UserPrivateRoute'
 import User from './page/User'
 import Useracct from './page/Useracct'
+import UserEdit from './page/UserEdit'
+import FundWallet from './page/FundWallet'
 
 
 const App = () => {
@@ -55,9 +57,13 @@ const App = () => {
         </Route>
           </Route>
           <Route element={<UserPrivateRoute />}>
-        <Route path="/user-dashboard/:fullName" element={<User />} />
-        <Route index element={<Useracct />} />
-              </Route>
+  <Route path="/user-dashboard" element={<User />}>
+    <Route index element={<Useracct />} />
+    <Route path="edit-profile" element={<UserEdit />} />  
+    <Route path="fund-wallet" element={<FundWallet />} />  
+  </Route>
+</Route>
+
 
         </Routes>
       </HashRouter>
