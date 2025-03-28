@@ -17,7 +17,7 @@ const Checkout = () => {
     const user = useSelector((state) => state?.User);
     const getCart = useSelector((state) => state?.cart);
     const [loading, setLoading] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [orderId, setOrderId] = useState("");
 
     console.log("cart",getCart)
