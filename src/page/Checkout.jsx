@@ -59,6 +59,7 @@ const Checkout = () => {
         setIsModalOpen(false);
         toast.success("Order Placed Successfully")
         dispatch(RemoveCart())
+        navigate('/')
       };
       const handleCancel = () => {
         setIsModalOpen(false);

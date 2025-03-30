@@ -150,3 +150,15 @@
     cursor: pointer;
 }
 
+@media (min-width: 320px) and (max-width: 768px) {
+
+    .checkout_main_body{
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .checkout_delivery_details, .checkout_order_message_area{
+        width: 100%;
+    }
+
+}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 import MainLanding from './page/MainLanding'
 import MyLandingPage from './page/MyLandingPage'
 import NewArrivals from './page/NewArrivals'
@@ -21,13 +21,18 @@ import Allproduct from './page/Admin/Allproduct'
 import Order from './page/Admin/Order'
 import PrivateRoute from './components/PrivateRoute'
 import UserPrivateRoute from './components/UserPrivateRoute'
+import User from './page/User'
+import Useracct from './page/Useracct'
+import UserEdit from './page/UserEdit'
+import FundWallet from './page/FundWallet'
+import AdminEdit from './page/Admin/AdminEdit'
 
 
 const App = () => {
   return (
     <>
       <ToastContainer />
-      <BrowserRouter>
+      <HashRouter>
         <ScrollToTop/>
         <Routes>
           <Route path='/login' element={<Login/>}/>
@@ -47,16 +52,23 @@ const App = () => {
         <Route element={<PrivateRoute/>}>
         <Route path='/adminpage' element={<Adminland />}>
           <Route index element={<Adminpage />} />
+          <Route path="Admin-edit" element={<AdminEdit />} />  
           <Route path='add-product' element={<AddProduct/>} />
           <Route path='all-products' element={<Allproduct/>}/>
           <Route path='all-orders' element={<Order/>}/>
         </Route>
           </Route>
-          {/* <Route element={<UserPrivateRoute />}>
-            <Route path="/user-dashboard" element={<UserDashboard />} />
-          </Route> */}
+          <Route element={<UserPrivateRoute />}>
+          <Route path="/user-dashboard" element={<User />}>
+          <Route index element={<Useracct />} />
+          <Route path="edit-profile" element={<UserEdit />} />  
+          <Route path="fund-wallet" element={<FundWallet />} />  
+        </Route>
+        </Route>
+
+
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </>
 
   )

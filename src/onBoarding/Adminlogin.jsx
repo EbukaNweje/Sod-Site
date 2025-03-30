@@ -7,7 +7,7 @@ import { IoEyeOff } from "react-icons/io5";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import {useDispatch} from 'react-redux'
-import { AdminToken } from '../components/global/features';
+import { AdminId, AdminToken } from '../components/global/features';
 
 const Adminlogin = () => {
     const dispatch = useDispatch()
@@ -83,6 +83,7 @@ const Adminlogin = () => {
         
         toast.success(res.data.message)
         dispatch(AdminToken(res?.data?.token))
+        dispatch(AdminId(res?.data?.data?._id))
         navigate(`/adminpage`)
         console.log("res", res.data)
         // console.log(res)

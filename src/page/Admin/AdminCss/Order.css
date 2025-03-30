@@ -56,8 +56,107 @@
     background: rgba(0, 255, 0, 0.1); 
     color: green;
   }
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: #fff;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.closeButton {
+  background: black;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+.closeButton:hover {
+  background: rgb(38, 38, 38);
+}
+
+.deleteButton {
+  background: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background 0.3s ease;
+}
+
+.deleteButton:hover {
+  background: #d9363e;
+}
+
+.modalContent h3 {
+  color: #333;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.modalContent p {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.modalContent ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.modalContent ul li {
+  background: #f9f9f9;
+  padding: 6px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
   
-  @media (max-width: 768px) {
+  @media(min-width: 320px) and (max-width: 768px) {
+    .orderContainer{
+      padding: 20px;
+    }
     .orderTable th, .orderTable td {
       font-size: 14px;
       padding: 10px;
