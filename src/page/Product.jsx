@@ -100,12 +100,14 @@ const Product = () => {
           <h1>{product.description}</h1>
           <h3>{Number(product.price).toLocaleString()}K</h3>
 
-          <p>Sizes Available : {product.size}</p>
+          {/* <p>Sizes Available 
+          : {product.size}
+          </p> */}
           <select
             value={selectedSize}
             onChange={(e) => setSelectedSize(e.target.value)}
           >
-            <option value="">Choose an option</option>
+            <option value="">Choose an size</option>
             <option value="S">S</option>
             <option value="M">M</option>
             <option value="L">L</option>
@@ -118,7 +120,10 @@ const Product = () => {
 
           {selectedSize && (
   <div className="availability_container">
-    {product.size.includes(selectedSize.toUpperCase()) ? (
+        <h4>
+        Availability: <span style={{ color: "green" }}>In Stock</span>
+      </h4>
+    {/* {product.size.includes(selectedSize.toUpperCase()) ? (
       <h4>
         Availability: <span style={{ color: "green" }}>In Stock</span>
       </h4>
@@ -126,7 +131,7 @@ const Product = () => {
       <h4>
         Availability: <span style={{ color: "red" }}>Out of Stock</span>
       </h4>
-    )}
+    )} */}
   </div>
 )}
 

@@ -8,16 +8,16 @@ import "./AdminCss/Product.css"
 const AddProduct = () => {
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
   const [sizes, setSizes] = useState([]);
   const [errors, setErrors] = useState({});
   const [image, setImage] = useState();
   const [formData, setFormData] = useState({
     name: "",
-    size: "",
+    // size: "",
     price: "",
     quantity: "",
-    category: "",
+    // category: "",
     description: "",
   });
 
@@ -26,8 +26,8 @@ const AddProduct = () => {
   useEffect(() => {
     const getAllCategories = async () => {
       try {
-        const response = await axios.get("https://sod-back-end.vercel.app/api/getallcartegory");
-        setCategories(response.data.data);
+        const response = await axios.get("https://sodbackend.onrender.com/api/getallcartegory");
+        // setCategories(response.data.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
@@ -149,8 +149,8 @@ const AddProduct = () => {
       formDatas.append("price", formData.price);
       formDatas.append("quantity", formData.quantity);
       formDatas.append("image", image); // Append the file object to the FormData
-      formDatas.append("size", formData.size);
-      formDatas.append("category", formData.category);
+      // formDatas.append("size", formData.size);
+      // formDatas.append("category", formData.category);
   
       // const config = {
       //   headers: {
@@ -176,10 +176,10 @@ const AddProduct = () => {
       toast.success("Product added successfully!");
       setFormData({
         name: "",
-        size: "",
+        // size: "",
         price: "",
         quantity: "",
-        category: "",
+        // category: "",
         description: "",
         image: null,
       });
@@ -201,7 +201,7 @@ const AddProduct = () => {
           {errors.productName && <p className="error">{errors.productName}</p>}
         </div>
 
-        <div className="form-group">
+        {/* <div className="form-group">
           <label>Available Sizes</label>
           <div className="size-input">
             <input type="text" name="size" value={formData.size} onChange={handleChange} />
@@ -215,7 +215,7 @@ const AddProduct = () => {
             ))}
           </div>
           {errors.sizes && <p className="error">{errors.sizes}</p>}
-        </div>
+        </div> */}
 
         <div className="form-group">
           <label>Product Amount (₦)</label>
@@ -229,7 +229,7 @@ const AddProduct = () => {
           {errors.quantity && <p className="error">{errors.quantity}</p>}
         </div>
 
-        <div className="form-group">
+        {/* <div className="form-group">
           <label>Category</label>
           <select name="category" value={formData.category} onChange={handleChange}>
             <option value="">Select a category</option>
@@ -240,7 +240,7 @@ const AddProduct = () => {
             ))}
           </select>
           {errors.category && <p className="error">{errors.category}</p>}
-        </div>
+        </div> */}
 
         <div className="form-group">
           <label>Description</label>
@@ -258,10 +258,10 @@ const AddProduct = () => {
         <div className="preview">
           <h3>Preview</h3>
           <p><strong>Name:</strong> {formData.name}</p>
-          <p><strong>Sizes:</strong> {sizes.join(", ")}</p>
+          {/* <p><strong>Sizes:</strong> {sizes.join(", ")}</p> */}
           <p><strong>Amount:</strong> ₦{formData.price || 0}</p>
           <p><strong>Quantity:</strong> {formData.quantity || 0}</p>
-          <p><strong>Category:</strong> {formData.category}</p>
+          {/* <p><strong>Category:</strong> {formData.category}</p> */}
           <p><strong>Description:</strong> {formData.description}</p>
           {/* {preview && <img src={preview} alt="Preview" />} */}
         </div>

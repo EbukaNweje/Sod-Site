@@ -97,7 +97,7 @@ const Allproduct = () => {
   loading={loading} 
   key="all-products" 
   product={products}  
-  limit={25} 
+  // limit={60} 
   onEdit={openEditModal} 
   handleDelete={handleDelete}
   Btnloading={Btnloading}
