@@ -39,7 +39,7 @@ const ProductC = ({ product = [], onEdit, loading, error, limit, handleDelete, B
               <p style={{color: "#b22222", fontSize: "12px"}}>
                  {e?.quantity} {e?.quantity === 1 ? "piece" : "pieces"} in stock
               </p>
-              <button className="editButton" onClick={onEdit}>Edit</button>
+            <button className="editButton" onClick={() => onEdit(e)}>Edit</button>
               <button
   className="deleteButton" onClick={() => handleDelete(e._id)}
   style={{ backgroundColor: "red", color: "white", zIndex: "1" }}
